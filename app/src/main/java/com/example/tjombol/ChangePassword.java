@@ -16,7 +16,6 @@ public class ChangePassword extends AppCompatActivity {
         setContentView(R.layout.change_password_main);
 
         backButtonPassword = findViewById(R.id.backButtonPassword);
-
         backButtonPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

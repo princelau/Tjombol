@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/white_rounded_rectangle">
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/primary_rounded_top_rectangle"
+            android:background="@drawable/primary_rectangle"
             android:orientation="horizontal">
 
             <Button
@@ -49,7 +49,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/paySlipDate"
+                    android:id="@+id/generatedPaySlipDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -62,7 +62,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/transactionId"
+                android:id="@+id/generatedTransactionId"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -106,7 +106,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/companyAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
@@ -285,7 +285,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/amountRequested"
+                android:id="@+id/generatedAmountRequested"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="$202"
@@ -310,7 +310,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/amountRemaining"
+                android:id="@+id/generatedAmountRemaining"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="$550"
@@ -335,7 +335,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/deduction"
+                android:id="@+id/generatedDeduction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="$2"
@@ -361,7 +361,7 @@
 
 
             <TextView
-                android:id="@+id/totalSalary"
+                android:id="@+id/generatedTotalSalary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="$200"
@@ -373,31 +373,37 @@
 
         </LinearLayout>
 
-        <com.ebanx.swipebtn.SwipeButton
-            android:id="@+id/swipe_btn"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:inner_text="SWIPE"
-            app:inner_text_color="@android:color/white"
-            app:inner_text_size="16sp"
-            app:inner_text_top_padding="18dp"
-            app:inner_text_bottom_padding="18dp"
-            app:inner_text_background="@drawable/shape_rounded"
-            app:button_image_height="60dp"
-            app:button_image_width="100dp"
-            app:button_image_disabled="@drawable/icon_lock_white"
-            app:button_image_enabled="@drawable/icon_email_white"
-            app:button_left_padding="20dp"
-            app:button_right_padding="20dp"
-            app:button_top_padding="20dp"
-            app:button_bottom_padding="20dp"
-            app:button_background="@drawable/shape_button"
-            app:initial_state="disabled"
-            app:has_activate_state="true"
-            />
+            android:layout_marginTop="10dp">
 
+            <com.ebanx.swipebtn.SwipeButton
+                android:id="@+id/claimSalarySwipeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                style="@style/AppTheme.SwipeButton"
+                app:inner_text="SWIPE TO CONFIRM"
+                app:inner_text_color="@android:color/white"
+                app:inner_text_size="18sp"
+                app:inner_text_top_padding="16dp"
+                app:inner_text_bottom_padding="16dp"
+                app:inner_text_background="@drawable/slider_button_background"
+                app:button_image_height="65dp"
+                app:button_image_width="65dp"
+                app:button_image_disabled="@drawable/icon_swipe_right"
+                app:button_image_enabled="@drawable/icon_claim_salary_confirmed"
+                app:button_left_padding="20dp"
+                app:button_right_padding="20dp"
+                app:button_top_padding="20dp"
+                app:button_bottom_padding="20dp"
+                app:button_background="@drawable/slider_button_white"
+                app:initial_state="disabled"
+                app:has_activate_state="true"
+                />
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>
