@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Tjombol</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">LOG IN</string>
+    <string name="signup">SIGN UP</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="no_account">Don\'t have an account? Sign Up</string>
+    <string name="app_logo">App Logo</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="today_top_bar">Today</string>
+    <string name="date_top_bar">22 March, 2019</string>
+
+    <string name="transactions_top_bar">Transactions</string>
+    <string name="month_top_bar">March, 2019</string>
+
+    <string name="wallet_balance_text">Wallet Balance</string>
+    <string name="wallet_balance_number">$750</string>
+
+
+    <string name="home">Home</string>
+    <string name="transactions">Transactions</string>
+    <string name="profile">Profile</string>
+
+    <string name="action_add_favourite">Add Favourite</string>
+    <string name="action_play_next">Next</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

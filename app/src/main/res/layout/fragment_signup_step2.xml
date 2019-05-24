@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <Button
+                android:id="@+id/backButtonSignup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/icon_back_white"
+                android:layout_marginTop="4dp"
+                android:scaleX="0.1"
+                android:scaleY="0.3" />
+
+            <TextView
+                android:id="@+id/accountDetailsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@android:color/white"
+                android:textSize="28sp"
+
+                android:text="Account Details" />
+        </RelativeLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/prince"
+            android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/mobileNumberSignupEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_phone_white"
+            android:drawablePadding="15dp"
+            android:ems="13"
+            android:hint="Phone Number"
+            android:inputType="number"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat" />
+
+        <EditText
+            android:id="@+id/nricSignupEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_nric_white"
+            android:drawablePadding="15dp"
+            android:ems="13"
+            android:hint="NRIC"
+            android:inputType="text"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat" />
+
+        <EditText
+            android:id="@+id/bankNumberSignupEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_bank_number_white"
+            android:drawablePadding="15dp"
+            android:ems="13"
+            android:hint="Bank Account Number"
+            android:inputType="number"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat" />
+
+        <EditText
+            android:id="@+id/companyIdSignupEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_company_id_white"
+            android:drawablePadding="15dp"
+            android:ems="13"
+            android:hint="Company ID"
+            android:inputType="number"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/signup2Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/primary_rounded_rectangle"
+            android:padding="12dp"
+            android:text="Next"
+            android:textColor="@android:color/white"
+            android:textSize="23sp"
+            android:fontFamily="@font/montserrat" />
+
+        <ImageView
+            android:id="@+id/signupStepsImage4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/icon_signup_step_2" />
+
+
+    </LinearLayout>
+</RelativeLayout>

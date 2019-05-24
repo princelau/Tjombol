@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <Button
+                android:id="@+id/backButtonSignup3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/icon_back_white"
+                android:scaleX="0.1"
+                android:scaleY="0.3" />
+
+            <TextView
+                android:id="@+id/paymentSchemeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@android:color/white"
+                android:textSize="28sp"
+                android:text="Payment Scheme" />
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+
+                <Button
+                    android:id="@+id/selectSchemeLeftButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icon_swipe_left"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentStart="true"
+                    android:scaleY="0.6"
+                    android:scaleX="0.4"/>
+
+                <ImageView
+                    android:id="@+id/flatLineImage"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:padding="20dp"
+                    android:background="@android:color/white"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/icon_flatline_graph" />
+
+                <Button
+                    android:id="@+id/selectSchemeRightButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icon_swipe_right"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"
+                    android:scaleY="0.6"
+                    android:scaleX="0.4"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/flatLineTitle"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                android:text="Flatline"/>
+
+            <TextView
+                android:id="@+id/flatLineDescription"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:text="Start off small, slowly increasing over time." />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/signup3Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/primary_rounded_rectangle"
+            android:padding="12dp"
+            android:text="Next"
+            android:textColor="@android:color/white"
+            android:textSize="23sp"
+            android:fontFamily="@font/montserrat" />
+
+        <ImageView
+            android:id="@+id/signupStepsImage4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/icon_signup_step_3" />
+
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:background="@drawable/primary_rectangle">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImage"
+                android:layout_gravity="center"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:src="@drawable/prince"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FF000000"/>
+
+            <TextView
+                android:id="@+id/nameProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prince Lau"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/montserrat"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/emailProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="prince@hotmail.com"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/accountSettingsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:text="ACCOUNT SETTINGS"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/white_rounded_rectangle"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <Button
+                android:id="@+id/updateEmailButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Email Address"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"
+                android:textAlignment="textStart"
+                android:paddingEnd="20dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat"
+                android:paddingStart="10dp"
+                android:drawableStart="@drawable/icon_change_email"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/icon_more_black"/>
+
+            <View style="@style/Divider"/>
+
+            <Button
+                android:id="@+id/changePasswordButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change Password"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"
+                android:textAlignment="textStart"
+                android:paddingEnd="20dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat"
+                android:paddingStart="10dp"
+                android:drawableStart="@drawable/icon_change_password"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/icon_more_black"/>
+
+            <View style="@style/Divider"/>
+
+            <Button
+                android:id="@+id/changePaymentSchemeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change Payment Scheme"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"
+                android:textAlignment="textStart"
+                android:paddingEnd="20dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat"
+                android:paddingStart="10dp"
+                android:drawableStart="@drawable/icon_change_scheme"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/icon_more_black"/>
+
+            <View style="@style/Divider"/>
+
+            <Button
+                android:id="@+id/updateDetailsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update My Details"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"
+                android:textAlignment="textStart"
+                android:paddingEnd="20dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat"
+                android:paddingStart="10dp"
+                android:drawableStart="@drawable/icon_change_details"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/icon_more_black"/>
+
+            <View style="@style/Divider"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/companySettingsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:text="COMPANY SETTINGS"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/white_rounded_rectangle"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <Button
+                android:id="@+id/changeCompanyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I'm Changing Company!"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"
+                android:textAlignment="textStart"
+                android:paddingEnd="20dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat"
+                android:paddingStart="10dp"
+                android:drawableStart="@drawable/icon_change_company"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/icon_more_black"/>
+
+            <View style="@style/Divider"/>
+
+            <Button
+                android:id="@+id/changeSalaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I'm Changing My Salary!"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"
+                android:textAlignment="textStart"
+                android:paddingEnd="20dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat"
+                android:paddingStart="10dp"
+                android:drawableStart="@drawable/icon_change_salary"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/icon_more_black"/>
+
+            <View style="@style/Divider"/>
+
+            <Button
+                android:id="@+id/termsAndConditionsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Terms &amp; Conditions"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"
+                android:textAlignment="textStart"
+                android:paddingEnd="20dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat"
+                android:paddingStart="10dp"
+                android:drawableStart="@drawable/icon_terms_and_conditions"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/icon_more_black"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
