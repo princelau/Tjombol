@@ -1,5 +1,6 @@
 package com.example.tjombol;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -25,6 +26,8 @@ public class SignupStep3Fragment extends Fragment {
             public void onClick(View v) {
                 ViewPager vp = getActivity().findViewById(R.id.nonSwipeViewPager);
                 vp.setCurrentItem(vp.getCurrentItem()+1);
+                //String[] dataArray = new String[] {paymentScheme.getText().toString()};
+                //dataPasser.onDataPass3(dataArray);
             }
         });
 
@@ -39,5 +42,21 @@ public class SignupStep3Fragment extends Fragment {
 
         return view;
     }
+
+
+    OnDataPass3 dataPasser;
+
+    public interface OnDataPass3 {
+        public void onDataPass3(String[] data);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        dataPasser = (OnDataPass3) context;
+    }
+
+
+
 }
 

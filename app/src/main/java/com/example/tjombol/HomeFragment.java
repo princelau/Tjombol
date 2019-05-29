@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,20 +100,33 @@ public class HomeFragment extends Fragment {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Enter the amount you wish to withdraw");
-                View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.text_inpu_password, (ViewGroup) getView(), false);
+                View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.text_input_password, (ViewGroup) getView(), false);
                 final EditText amountWithdrawEditText = (EditText) viewInflated.findViewById(R.id.amountWithdrawEditText);
                 builder.setView(viewInflated);
+
+
 
                 builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        amountWithdraw = amountWithdrawEditText.getText().toString();
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        ClaimSalaryFragment claimSalaryFragment = new ClaimSalaryFragment();
-                        fragmentTransaction.replace(R.id.fragment_container, claimSalaryFragment);
-                        fragmentTransaction.commit();
+                        if (TextUtils.isEmpty(amountWithdrawEditText.getText().toString())) {
+                            Toast.makeText(getActivity(),"Please enter a number",Toast.LENGTH_LONG).show();
+                        }
+                        else if (amountWithdrawEditText.getText().toString().startsWith("0") || amountWithdrawEditText.getText().toString().contains(".")) {
+                            Toast.makeText(getActivity(),"Please enter a valid whole number",Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            dialog.dismiss();
+                            amountWithdraw = amountWithdrawEditText.getText().toString();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            ClaimSalaryFragment claimSalaryFragment = new ClaimSalaryFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("amountWithdraw", amountWithdraw);
+                            claimSalaryFragment.setArguments(bundle);
+                            fragmentTransaction.replace(R.id.fragment_container, claimSalaryFragment);
+                            fragmentTransaction.commit();
+                        }
                     }
                 });
                 builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -128,6 +143,12 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+
 
 
     // Add Fragments to Tabs

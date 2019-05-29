@@ -376,7 +376,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="15dp">
 
             <com.ebanx.swipebtn.SwipeButton
                 android:id="@+id/claimSalarySwipeButton"
@@ -384,6 +384,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginLeft="20dp"
                 style="@style/AppTheme.SwipeButton"
                 app:inner_text="SWIPE TO CONFIRM"
                 app:inner_text_color="@android:color/white"
@@ -391,8 +392,8 @@
                 app:inner_text_top_padding="16dp"
                 app:inner_text_bottom_padding="16dp"
                 app:inner_text_background="@drawable/slider_button_background"
-                app:button_image_height="65dp"
-                app:button_image_width="65dp"
+                app:button_image_height="60dp"
+                app:button_image_width="60dp"
                 app:button_image_disabled="@drawable/icon_swipe_right"
                 app:button_image_enabled="@drawable/icon_claim_salary_confirmed"
                 app:button_left_padding="20dp"
