@@ -105,16 +105,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/companyAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
-                android:maxLines="1"
-                android:text="Block 123, Upper Changi Road East S40102"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -153,34 +143,7 @@
                     android:textAlignment="textEnd" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="1dp">
 
-                <TextView
-                    android:id="@+id/nricTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="NRIC"
-                    android:fontFamily="@font/montserrat"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textAlignment="textStart" />
-
-                <TextView
-                    android:id="@+id/nric"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="S1234567A"
-                    android:fontFamily="@font/montserrat"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textAlignment="textEnd" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -247,22 +210,51 @@
                 android:layout_marginTop="1dp">
 
                 <TextView
-                    android:id="@+id/paymentSchemeTitle"
+                    android:id="@+id/workMonthTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Payment Scheme"
+                    android:text="Work Month"
                     android:fontFamily="@font/montserrat"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"
                     android:textAlignment="textStart" />
 
                 <TextView
-                    android:id="@+id/paymentScheme"
+                    android:id="@+id/workMonth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Flatline"
+                    android:text="1/1/19 - 31/1/19"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:id="@+id/monthlySalaryTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Monthly Salary"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:textAlignment="textStart" />
+
+                <TextView
+                    android:id="@+id/monthlySalary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$2000"
                     android:fontFamily="@font/montserrat"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"
@@ -279,7 +271,7 @@
                 android:layout_marginTop="9dp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:text="AMOUNT REQUESTED"
                 android:textAlignment="center"
                 android:textStyle="bold" />
@@ -298,51 +290,47 @@
                 android:layout_marginTop="9dp"/>
 
             <TextView
-                android:id="@+id/amountRemainingTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:fontFamily="@font/montserrat"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                android:text="AMOUNT REMAINING"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/generatedAmountRemaining"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="$550"
-                android:fontFamily="@font/montserrat"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:textAlignment="center"/>
-
-            <View style="@style/Divider"
-                android:layout_marginTop="9dp"/>
-
-            <TextView
                 android:id="@+id/deductionTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:text="DEDUCTION"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/generatedDeduction"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$2"
-                android:fontFamily="@font/montserrat"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:textAlignment="center"/>
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/transactionFeeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Transaction Fees"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textAlignment="textStart"/>
+
+                <TextView
+                    android:id="@+id/transactionFee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$2"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textAlignment="textEnd"/>
+
+
+            </LinearLayout>
 
             <View style="@style/Divider"
                 android:layout_marginTop="9dp"/>
@@ -354,7 +342,7 @@
                 android:layout_marginTop="9dp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:text="TOTAL SALARY INTO BANK"
                 android:textAlignment="center"
                 android:textStyle="bold" />
