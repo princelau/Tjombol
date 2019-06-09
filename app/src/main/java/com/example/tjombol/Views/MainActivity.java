@@ -1,11 +1,14 @@
-package com.example.tjombol;
+package com.example.tjombol.Views;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.example.tjombol.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new HomeFragment();
                             break;
                         case R.id.nav_transactions:
-                            selectedFragment = new TransactionsFragment();
+                            selectedFragment = new TransactionFragment();
                             break;
                         case R.id.nav_profile:
                             selectedFragment = new ProfileFragment();

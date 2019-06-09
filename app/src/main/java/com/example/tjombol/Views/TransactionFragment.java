@@ -1,15 +1,19 @@
-package com.example.tjombol;
+package com.example.tjombol.Views;
 
-import android.animation.ObjectAnimator;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,46 +22,75 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.example.tjombol.Models.TransactionModel;
+import com.example.tjombol.R;
+import com.example.tjombol.ViewModels.TransactionViewModel;
 import java.util.ArrayList;
+import java.util.List;
 
-public class TransactionsFragment extends Fragment {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
+//First to be implement
+public class TransactionFragment extends Fragment {
 
-    private TextView mTextViewEmpty;
-    private ProgressBar mProgressBarLoading;
-    private ImageView mImageViewEmpty;
-    private RecyclerView mRecyclerView;
+    //@Inject
+    //ViewModelFactory viewModelFactory;
+
+    @BindView(R.id.textViewEmpty)
+    TextView mTextViewEmpty;
+
+    @BindView(R.id.progressBarLoading)
+    ProgressBar mProgressBarLoading;
+
+    @BindView(R.id.imageViewEmpty)
+    ImageView mImageViewEmpty;
+
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+
+    @BindView(R.id.payslipPopupBackButton)
+    Button backButton;
+
+    private Unbinder unbinder;
+
     private ListAdapter mListadapter;
-    private Button backButton;
+
+    private TransactionViewModel transactionViewModel;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return inflater.inflate(R.layout.fragment_transactions, container, false);
-        //return super.onCreateView(inflater, container, savedInstanceState);
-
 
         View view = inflater.inflate(R.layout.fragment_transactions, container, false);
-
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        mTextViewEmpty = (TextView)view.findViewById(R.id.textViewEmpty);
-        mImageViewEmpty = (ImageView)view.findViewById(R.id.imageViewEmpty);
-        mProgressBarLoading = (ProgressBar)view.findViewById(R.id.progressBarLoading);
+        unbinder = ButterKnife.bind(this, view);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new LineDividerRecyclerView(getActivity()));
 
-        ArrayList data = new ArrayList<Transaction>();
+        transactionViewModel = ViewModelProviders.of(this).get(TransactionViewModel.class);
+
+        //Live data is lifecycle aware, and it will only update our activity if it is in foreground
+        transactionViewModel.getProjectRetroListObservable().observe(this, new Observer<List<TransactionModel>>() {
+            @Override
+            public void onChanged(List<TransactionModel> transactionModels) {
+                //update recycler view
+                Toast.makeText(getContext(),"on Changed",Toast.LENGTH_SHORT).show();
+            }
+        });
+        //
+
+        /*
+        ArrayList data = new ArrayList<TransactionModel>();
         for (int i = 0; i < TransactionInformation.idArray.length; i++)
         {
             data.add(
@@ -76,12 +109,8 @@ public class TransactionsFragment extends Fragment {
 
         mListadapter = new ListAdapter(data);
         mRecyclerView.setAdapter(mListadapter);
-
-
-
+        */
         return view;
-
-
     }
 
 
@@ -92,6 +121,7 @@ public class TransactionsFragment extends Fragment {
 
     }
 
+    /*
     public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
     {
         private ArrayList<Transaction> transactionList;
@@ -207,6 +237,7 @@ public class TransactionsFragment extends Fragment {
 
 
     }
+    */
 
     public void togglePayslipPopup(View anchorView) {
 
@@ -219,7 +250,7 @@ public class TransactionsFragment extends Fragment {
         View viewGroup= getActivity().getLayoutInflater().inflate(R.layout.payslip_popup, null, false);
 
         final PopupWindow popupWindow = new PopupWindow(viewGroup, width, height);
-        backButton = (Button) viewGroup.findViewById(R.id.payslipPopupBackButton);
+        //backButton = (Button) viewGroup.findViewById(R.id.payslipPopupBackButton);
 
         if (popupWindow.isShowing()) {
             backButton.setOnClickListener(null);
@@ -242,4 +273,9 @@ public class TransactionsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }

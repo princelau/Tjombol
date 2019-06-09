@@ -1,17 +1,19 @@
-package com.example.tjombol;
+package com.example.tjombol.Views;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.ebanx.swipebtn.OnActiveListener;
 import com.ebanx.swipebtn.SwipeButton;
+import com.example.tjombol.R;
 
 public class ClaimSalaryFragment extends Fragment {
 

@@ -1,17 +1,20 @@
-package com.example.tjombol;
+package com.example.tjombol.Views;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 
-public class LineDividerRecyclerView extends RecyclerView.ItemDecoration {
+import com.example.tjombol.R;
+
+public class LineDividerRecyclerViewDark extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
 
-    public LineDividerRecyclerView(Context context) {
-        mDivider = ContextCompat.getDrawable(context,R.drawable.line_divider);
+    public LineDividerRecyclerViewDark(Context context) {
+        mDivider = ContextCompat.getDrawable(context, R.drawable.line_divider_dark);
     }
 
     @Override

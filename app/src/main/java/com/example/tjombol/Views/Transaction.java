@@ -1,6 +1,8 @@
-package com.example.tjombol;
+package com.example.tjombol.Views;
 
-public class Transaction {
+/*
+
+public class TransactionModel {
 
     private String id;
     private String sender;
@@ -11,10 +13,10 @@ public class Transaction {
     private String comment;
     private String status;
 
-    public Transaction() {
+    public TransactionModel() {
     }
 
-    public Transaction(String id, String sender, String receiver, String type,  int amount, String date, String comment, String status) {
+    public TransactionModel(String id, String sender, String receiver, String type,  int amount, String date, String comment, String status) {
         this.id = id;
         this.sender = sender;
         this.receiver = receiver;
@@ -51,3 +53,4 @@ public class Transaction {
 
     public String getStatus() { return status; }
 }
+*/
