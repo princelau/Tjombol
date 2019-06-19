@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="resource"
+            type="com.example.tjombol.Remote.Repositories.Service.Resource" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:background="@color/colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,7 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true">
+                android:layout_centerVertical="true"
+                app:resource="@{resource}">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -101,7 +115,18 @@
                 android:text="NO INFO"
                 android:visibility="gone" />
 
+            <!--databinding-->
+            <TextView
+                android:id="@+id/errorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@{resource.message}"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
         </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>
+</layout>

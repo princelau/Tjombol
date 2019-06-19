@@ -1,4 +1,4 @@
-package com.example.tjombol.Repositories;
+package com.example.tjombol.Remote.Repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -6,14 +6,14 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.example.tjombol.DB.DAOs.NoteDao;
-import com.example.tjombol.DB.Entities.Note;
+import com.example.tjombol.DB.Entities.NoteEntity;
 import com.example.tjombol.DB.NoteDatabase;
 
 import java.util.List;
 
 public class NoteRepository {
     private NoteDao noteDao;
-    private LiveData<List<Note>> allNotes;
+    private LiveData<List<NoteEntity>> allNotes;
 
     public NoteRepository(Application application){
         NoteDatabase database = NoteDatabase.getInstance(application);
@@ -22,28 +22,28 @@ public class NoteRepository {
     }
 
     // Database Methods Abstraction Layer
-    public void insert(Note note){
-        new InsertNoteAsyncTask(noteDao).execute(note);
+    public void insert(NoteEntity noteEntity){
+        new InsertNoteAsyncTask(noteDao).execute(noteEntity);
     }
 
-    public void update(Note note){
-        new UpdateNoteAsyncTask(noteDao).execute(note);
+    public void update(NoteEntity noteEntity){
+        new UpdateNoteAsyncTask(noteDao).execute(noteEntity);
     }
 
-    public void delete(Note note){
-        new DeleteNoteAsyncTask(noteDao).execute(note);
+    public void delete(NoteEntity noteEntity){
+        new DeleteNoteAsyncTask(noteDao).execute(noteEntity);
     }
 
     public void deleteAllNotes(){
         new DeleteAllNotesAsyncTask(noteDao).execute();
     }
 
-    public LiveData<List<Note>> getAllNotes(){
+    public LiveData<List<NoteEntity>> getAllNotes(){
         return allNotes;
     }
 
     // Async Data handling
-    private static class InsertNoteAsyncTask extends AsyncTask<Note,Void,Void>{
+    private static class InsertNoteAsyncTask extends AsyncTask<NoteEntity,Void,Void>{
 
         private NoteDao noteDao;
 
@@ -52,13 +52,13 @@ public class NoteRepository {
         }
 
         @Override
-        protected Void doInBackground(Note... notes) {
-            noteDao.insert(notes[0]);
+        protected Void doInBackground(NoteEntity... noteEntities) {
+            noteDao.insert(noteEntities[0]);
             return null;
         }
     }
 
-    private static class UpdateNoteAsyncTask extends AsyncTask<Note,Void,Void>{
+    private static class UpdateNoteAsyncTask extends AsyncTask<NoteEntity,Void,Void>{
 
         private NoteDao noteDao;
 
@@ -67,13 +67,13 @@ public class NoteRepository {
         }
 
         @Override
-        protected Void doInBackground(Note... notes) {
-            noteDao.update(notes[0]);
+        protected Void doInBackground(NoteEntity... noteEntities) {
+            noteDao.update(noteEntities[0]);
             return null;
         }
     }
 
-    private static class DeleteNoteAsyncTask extends AsyncTask<Note,Void,Void>{
+    private static class DeleteNoteAsyncTask extends AsyncTask<NoteEntity,Void,Void>{
 
         private NoteDao noteDao;
 
@@ -82,8 +82,8 @@ public class NoteRepository {
         }
 
         @Override
-        protected Void doInBackground(Note... notes) {
-            noteDao.delete(notes[0]);
+        protected Void doInBackground(NoteEntity... noteEntities) {
+            noteDao.delete(noteEntities[0]);
             return null;
         }
     }

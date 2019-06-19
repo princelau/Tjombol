@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tjombol.Models.TransactionModel;
+import com.example.tjombol.Remote.Models.TransactionResponse;
 import com.example.tjombol.R;
 
 import java.util.ArrayList;
@@ -84,9 +84,9 @@ public class UpcomingSalaryFragment extends Fragment {
 
     public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
     {
-        private ArrayList<TransactionModel> transactionList;
+        private ArrayList<TransactionResponse> transactionList;
 
-        public ListAdapter(ArrayList<TransactionModel> transactionsList)
+        public ListAdapter(ArrayList<TransactionResponse> transactionsList)
         {
             this.transactionList = transactionsList;
         }

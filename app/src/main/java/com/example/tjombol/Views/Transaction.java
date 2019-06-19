@@ -2,7 +2,7 @@ package com.example.tjombol.Views;
 
 /*
 
-public class TransactionModel {
+public class TransactionResponse {
 
     private String id;
     private String sender;
@@ -13,10 +13,10 @@ public class TransactionModel {
     private String comment;
     private String status;
 
-    public TransactionModel() {
+    public TransactionResponse() {
     }
 
-    public TransactionModel(String id, String sender, String receiver, String type,  int amount, String date, String comment, String status) {
+    public TransactionResponse(String id, String sender, String receiver, String type,  int amount, String date, String comment, String status) {
         this.id = id;
         this.sender = sender;
         this.receiver = receiver;

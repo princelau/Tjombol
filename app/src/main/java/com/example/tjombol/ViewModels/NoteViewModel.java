@@ -6,14 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.tjombol.DB.Entities.Note;
-import com.example.tjombol.Repositories.NoteRepository;
+import com.example.tjombol.DB.Entities.NoteEntity;
+import com.example.tjombol.Remote.Repositories.NoteRepository;
 
 import java.util.List;
 
 public class NoteViewModel extends AndroidViewModel {
     private NoteRepository repository;
-    private LiveData<List<Note>> allNotes;
+    private LiveData<List<NoteEntity>> allNotes;
 
     public NoteViewModel(@NonNull Application application) {
         super(application);
@@ -22,23 +22,23 @@ public class NoteViewModel extends AndroidViewModel {
 
     }
 
-    public void insert(Note note){
-        repository.insert(note);
+    public void insert(NoteEntity noteEntity){
+        repository.insert(noteEntity);
     }
 
-    public void update(Note note){
-        repository.delete(note);
+    public void update(NoteEntity noteEntity){
+        repository.delete(noteEntity);
     }
 
-    public void delete(Note note){
-        repository.delete(note);
+    public void delete(NoteEntity noteEntity){
+        repository.delete(noteEntity);
     }
 
     public void deleteAllNotes(){
         repository.deleteAllNotes();
     }
 
-    public LiveData<List<Note>> getAllNotes(){
+    public LiveData<List<NoteEntity>> getAllNotes(){
         return allNotes;
     }
 }

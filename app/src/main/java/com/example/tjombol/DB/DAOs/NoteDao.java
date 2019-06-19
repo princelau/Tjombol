@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.tjombol.DB.Entities.Note;
+import com.example.tjombol.DB.Entities.NoteEntity;
 
 import java.util.List;
 
@@ -15,17 +15,17 @@ import java.util.List;
 public interface NoteDao {
 
     @Insert
-    void insert(Note note);
+    void insert(NoteEntity noteEntity);
 
     @Update
-    void update(Note note);
+    void update(NoteEntity noteEntity);
 
     @Delete
-    void delete(Note note);
+    void delete(NoteEntity noteEntity);
 
     @Query("DELETE FROM note_table")
     void deleteAllnotes();
 
     @Query("SELECT * FROM note_table ORDER BY priority DESC")
-    LiveData<List<Note>> getAllNotes();
+    LiveData<List<NoteEntity>> getAllNotes();
 }

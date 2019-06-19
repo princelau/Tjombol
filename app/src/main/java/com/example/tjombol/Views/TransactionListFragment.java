@@ -5,10 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
@@ -21,30 +19,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tjombol.Models.TransactionModel;
+import com.example.tjombol.Adapters.TransactionAdapter;
+import com.example.tjombol.DB.Entities.TxEntity;
+import com.example.tjombol.Remote.Models.TransactionResponse;
 import com.example.tjombol.R;
-import com.example.tjombol.ViewModels.TransactionViewModel;
-import java.util.ArrayList;
+import com.example.tjombol.Remote.Repositories.Service.Status;
+import com.example.tjombol.ViewModels.TransactionListViewModel;
+import com.example.tjombol.Views.Base.BaseFragment;
+import com.example.tjombol.Views.Callback.TransactionListCallback;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 //First to be implement
-public class TransactionFragment extends Fragment {
+public class TransactionListFragment extends Fragment{
 
     //@Inject
     //ViewModelFactory viewModelFactory;
 
     @BindView(R.id.textViewEmpty)
     TextView mTextViewEmpty;
+
+    @BindView(R.id.errorText)
+    TextView errorText;
 
     @BindView(R.id.progressBarLoading)
     ProgressBar mProgressBarLoading;
@@ -59,11 +65,13 @@ public class TransactionFragment extends Fragment {
     Button backButton;
 
     private Unbinder unbinder;
-
     private ListAdapter mListadapter;
 
-    private TransactionViewModel transactionViewModel;
+    private TransactionListViewModel transactionViewModel;
 
+    private boolean popUpIsShowing;
+
+    private PopupWindow popUp = null;
 
     @Nullable
     @Override
@@ -74,23 +82,42 @@ public class TransactionFragment extends Fragment {
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
+
+        // Set Recycler View
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new LineDividerRecyclerView(getActivity()));
 
-        transactionViewModel = ViewModelProviders.of(this).get(TransactionViewModel.class);
+        // Setup Adapter
+        TransactionAdapter transactionAdapter = new TransactionAdapter(this);
+        mRecyclerView.setAdapter(transactionAdapter);
 
-        //Live data is lifecycle aware, and it will only update our activity if it is in foreground
-        transactionViewModel.getProjectRetroListObservable().observe(this, new Observer<List<TransactionModel>>() {
+        // Live data is lifecycle aware, and it will only update our activity if it is in foreground
+        transactionViewModel = ViewModelProviders.of(this).get(TransactionListViewModel.class);
+        transactionViewModel.getTransactionsObservable()
+                .observe(this, listResource ->  {
+                    if(null != listResource && (listResource.status == Status.ERROR || listResource.status == Status.SUCCESS)){
+                        mProgressBarLoading.setVisibility(View.GONE);
+                    }
+                    transactionAdapter.setTransactions(listResource.data);
+
+                    // If the cached data is already showing then no need to show the error
+                    if(null != mRecyclerView.getAdapter() && mRecyclerView.getAdapter().getItemCount() > 0){
+                        errorText.setVisibility(View.GONE);
+                    }
+                    /*
             @Override
-            public void onChanged(List<TransactionModel> transactionModels) {
-                //update recycler view
+            public void onChanged(List<TransactionResponse> transactions){
+                // update recycler view
                 Toast.makeText(getContext(),"on Changed",Toast.LENGTH_SHORT).show();
+                transactionAdapter.setTransactions(transactions);
             }
+
+
+                    */
         });
-        //
 
         /*
-        ArrayList data = new ArrayList<TransactionModel>();
+        ArrayList data = new ArrayList<TransactionResponse>();
         for (int i = 0; i < TransactionInformation.idArray.length; i++)
         {
             data.add(
@@ -121,7 +148,7 @@ public class TransactionFragment extends Fragment {
 
     }
 
-    /*
+    /**
     public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
     {
         private ArrayList<Transaction> transactionList;
@@ -237,7 +264,8 @@ public class TransactionFragment extends Fragment {
 
 
     }
-    */
+
+
 
     public void togglePayslipPopup(View anchorView) {
 
@@ -272,10 +300,49 @@ public class TransactionFragment extends Fragment {
         }
 
     }
+    */
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    public void togglePayslipPopup(View anchorView) {
+
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels - dm.widthPixels/20;
+        int height = dm.heightPixels - dm.heightPixels/7;
+
+        View viewGroup= getActivity().getLayoutInflater().inflate(R.layout.payslip_popup, null, false);
+
+        final PopupWindow popupWindow = new PopupWindow(viewGroup, width, height);
+        //backButton = (Button) viewGroup.findViewById(R.id.payslipPopupBackButton);
+        popUpIsShowing = popupWindow.isShowing();
+
+        if (popUpIsShowing) {
+            //backButton.setOnClickListener(null);
+            popupWindow.dismiss();
+            popUpIsShowing = false;
+            popUp = null;
+        }
+        else {
+            popupWindow.setFocusable(true);
+            popupWindow.setBackgroundDrawable(new ColorDrawable());
+            popupWindow.setOutsideTouchable(true);
+            popupWindow.showAtLocation(anchorView, Gravity.TOP, 0, 90);
+            //closePopUp(popupWindow);
+            popUp = popupWindow;
+        }
+    }
+
+    @OnClick(R.id.payslipPopupBackButton)
+    void closePopUp() {
+        if(popUp != null) {
+            popUp.dismiss();
+        }
     }
 }

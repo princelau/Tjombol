@@ -10,9 +10,9 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.tjombol.DB.DAOs.NoteDao;
-import com.example.tjombol.DB.Entities.Note;
+import com.example.tjombol.DB.Entities.NoteEntity;
 
-@Database(entities = {Note.class},version = 1)
+@Database(entities = {NoteEntity.class},version = 1)
 public abstract class NoteDatabase extends RoomDatabase {
 
     private static NoteDatabase instance;
@@ -45,9 +45,9 @@ public abstract class NoteDatabase extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            noteDao.insert(new Note("Title 1","Description 1",1));
-            noteDao.insert(new Note("Title 2","Description 2",1));
-            noteDao.insert(new Note("Title 3","Description 3",1));
+            noteDao.insert(new NoteEntity("Title 1","Description 1",1));
+            noteDao.insert(new NoteEntity("Title 2","Description 2",1));
+            noteDao.insert(new NoteEntity("Title 3","Description 3",1));
             return null;
         }
     }

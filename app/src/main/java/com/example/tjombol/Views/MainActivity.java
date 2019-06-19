@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new HomeFragment();
                             break;
                         case R.id.nav_transactions:
-                            selectedFragment = new TransactionFragment();
+                            selectedFragment = new TransactionListFragment();
                             break;
                         case R.id.nav_profile:
                             selectedFragment = new ProfileFragment();
