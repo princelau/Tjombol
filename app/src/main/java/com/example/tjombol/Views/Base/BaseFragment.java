@@ -20,7 +20,7 @@ import javax.inject.Inject;
 import dagger.android.support.AndroidSupportInjection;
 
 public abstract class BaseFragment <V extends ViewModel, D extends ViewDataBinding> extends Fragment {
-
+/*
     @Inject
     ViewModelProvider.Factory viewModelFactory;
 
@@ -40,11 +40,13 @@ public abstract class BaseFragment <V extends ViewModel, D extends ViewDataBindi
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel());
     }
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
         return dataBinding.getRoot();
     }
+    */
 
 }

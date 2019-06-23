@@ -29,13 +29,6 @@ public abstract class ViewModelModule {
     abstract ViewModel bindsTransactionListViewModel(TransactionListViewModel transactionListViewModel);
 
     @Binds
-    @IntoMap
-    @ViewModelKey(TransactionListViewModel.class)
-    @SuppressWarnings("unused")
-    abstract ViewModel bindsArticleDetailsiewModel(TransactionListViewModel transactionListViewModel);
-
-
-    @Binds
     @SuppressWarnings("unused")
     abstract ViewModelProvider.Factory bindsViewModelFactory(ViewModelFactory viewModelFactory);
 }

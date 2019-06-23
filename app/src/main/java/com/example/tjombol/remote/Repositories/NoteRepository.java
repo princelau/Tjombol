@@ -1,4 +1,4 @@
-package com.example.tjombol.Remote.Repositories;
+package com.example.tjombol.remote.Repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;

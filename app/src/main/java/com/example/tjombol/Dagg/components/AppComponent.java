@@ -2,6 +2,7 @@ package com.example.tjombol.Dagg.components;
 
 import android.app.Application;
 
+
 import com.example.tjombol.Dagg.builder.ActivityBuilderModule;
 import com.example.tjombol.Dagg.module.AppModule;
 import com.example.tjombol.TjombolApp;
@@ -19,12 +20,18 @@ import dagger.android.AndroidInjectionModule;
  * Created: 7/24/2018
  * Modified: 7/24/2018
  */
+
+
 @Singleton
 @Component(modules = {
         AppModule.class,
-        AndroidInjectionModule.class,
-        ActivityBuilderModule.class})
+        AndroidInjectionModule.class
+        })
+        //ActivityBuilderModule.class})
+
 public interface AppComponent {
+
+    void inject(TjombolApp tjombolApp);
 
     @Component.Builder
     interface Builder {
@@ -34,5 +41,5 @@ public interface AppComponent {
         AppComponent build();
     }
 
-    void inject(TjombolApp tjombolApp);
+
 }

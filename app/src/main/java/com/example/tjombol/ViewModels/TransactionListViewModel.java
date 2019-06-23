@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.tjombol.DB.Entities.TxEntity;
-import com.example.tjombol.Remote.Repositories.Service.Resource;
-import com.example.tjombol.Remote.Repositories.TransactionRepository;
+import com.example.tjombol.remote.Resource;
+import com.example.tjombol.remote.Repositories.TransactionRepository;
 
 import java.util.List;
 

@@ -6,9 +6,9 @@ import androidx.room.Room;
 
 import com.example.tjombol.DB.DAOs.TransactionDao;
 import com.example.tjombol.DB.TxDatabase;
-import com.example.tjombol.Remote.Repositories.Service.ApiConstants;
-import com.example.tjombol.Remote.Repositories.Service.ApiService;
-import com.example.tjombol.Remote.Repositories.Service.RequestInterceptor;
+import com.example.tjombol.remote.ApiConstants;
+import com.example.tjombol.remote.ApiService;
+import com.example.tjombol.remote.RequestInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -57,7 +57,7 @@ public class AppModule {
     @Provides
     @Singleton
     TxDatabase provideTransactionDatabase(Application application) {
-        return Room.databaseBuilder(application, TxDatabase.class, "articles.db").build();
+        return Room.databaseBuilder(application, TxDatabase.class, "tx_database.db").build();
     }
 
     @Provides

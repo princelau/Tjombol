@@ -3,12 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="resource"
-            type="com.example.tjombol.Remote.Repositories.Service.Resource" />
+            type="com.example.tjombol.remote.Resource" />
 
     </data>
 

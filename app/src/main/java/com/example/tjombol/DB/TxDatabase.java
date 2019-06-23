@@ -15,10 +15,11 @@ import com.example.tjombol.DB.Entities.TxEntity;
 @Database(entities = {TxEntity.class},version = 1)
 public abstract class TxDatabase extends RoomDatabase {
 
-    private static TxDatabase instance;
+    //private static TxDatabase instance;
 
     public abstract TransactionDao transactionDao();
-
+}
+    /*
     public static synchronized TxDatabase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
@@ -57,6 +58,7 @@ public abstract class TxDatabase extends RoomDatabase {
         }
     }
 }
+*/
     /*
 public class TransactionInformation {
 

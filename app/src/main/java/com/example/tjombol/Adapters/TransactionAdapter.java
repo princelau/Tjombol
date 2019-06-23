@@ -11,20 +11,27 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tjombol.DB.Entities.TxEntity;
-import com.example.tjombol.Remote.Models.TransactionResponse;
 import com.example.tjombol.R;
+import com.example.tjombol.Views.Base.BaseAdapter;
 import com.example.tjombol.Views.TransactionListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TxViewHolder> {
+public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHolder, TxEntity> {
 
-    private List<TxEntity> transactions = new ArrayList<>();
+    private List<TxEntity> transactions;
     private TransactionListFragment mFragment;
 
     public TransactionAdapter(TransactionListFragment mFragment) {
+        transactions = new ArrayList<>();
         this.mFragment = mFragment;
+    }
+
+    @Override
+    public void setData(List<TxEntity> data) {
+        this.transactions = data;
+        notifyDataSetChanged();
     }
 
     class TxViewHolder extends RecyclerView.ViewHolder
@@ -122,11 +129,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     // notify changes
+    /*
     public void setTransactions(List<TxEntity> transactions){
         this.transactions = transactions;
         notifyDataSetChanged();
     }
-
+*/
     // Modify view when click
 
 }

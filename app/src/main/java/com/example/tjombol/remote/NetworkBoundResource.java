@@ -1,4 +1,4 @@
-package com.example.tjombol.Remote.Repositories.Service;
+package com.example.tjombol.remote;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;

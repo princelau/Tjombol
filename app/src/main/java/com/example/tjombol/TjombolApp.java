@@ -1,7 +1,10 @@
 package com.example.tjombol;
 
+
 import android.app.Activity;
 import android.app.Application;
+
+import com.example.tjombol.Dagg.components.DaggerAppComponent;
 
 import javax.inject.Inject;
 
@@ -12,14 +15,9 @@ import dagger.android.HasActivityInjector;
 public class TjombolApp extends Application implements HasActivityInjector {
 
     private static TjombolApp sInstance;
-
-
     public static TjombolApp getAppContext() {
         return sInstance;
     }
-
-
-
     private static synchronized void setInstance(TjombolApp app) {
         sInstance = app;
     }
@@ -34,6 +32,7 @@ public class TjombolApp extends Application implements HasActivityInjector {
     }
 
     private void initializeComponent() {
+
         DaggerAppComponent.builder()
                 .application(this)
                 .build()

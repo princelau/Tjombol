@@ -1,14 +1,14 @@
-package com.example.tjombol.Remote.Repositories;
+package com.example.tjombol.remote.Repositories;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.example.tjombol.DB.DAOs.TransactionDao;
 import com.example.tjombol.DB.Entities.TxEntity;
-import com.example.tjombol.Remote.Models.TransactionResponse;
-import com.example.tjombol.Remote.Repositories.Service.ApiService;
-import com.example.tjombol.Remote.Repositories.Service.NetworkBoundResource;
-import com.example.tjombol.Remote.Repositories.Service.Resource;
+import com.example.tjombol.remote.ApiService;
+import com.example.tjombol.remote.Models.TransactionResponse;
+import com.example.tjombol.remote.NetworkBoundResource;
+import com.example.tjombol.remote.Resource;
 
 import java.util.List;
 
@@ -16,10 +16,7 @@ import javax.inject.Inject;
 
 import retrofit2.Call;
 
-public class TransactionRepository {
-
-
-    /*
+    /**
     Application application;
 
     private static OkHttpClient providesOkHttpClientBuilder() {
@@ -95,7 +92,7 @@ public class TransactionRepository {
     }
 }
 */
-
+public class TransactionRepository {
     private final TransactionDao transactionDao;
     private final ApiService apiService;
 
@@ -105,13 +102,10 @@ public class TransactionRepository {
         this.apiService = service;
     }
     /**
-     * This method fetches the popular articles from the service.
+     * This method fetches the transactions from the service.
      * Once the fetching is done the data is cached to local db so that the app can even work offline
      * @return List of transactions
      */
-/*
-    public LiveData<Resource<List<TxEntity>>> LoadTransactions()
-    */
     public LiveData<Resource<List<TxEntity>>> loadTransactions() {
         return new NetworkBoundResource<List<TxEntity>, TransactionResponse>() {
 

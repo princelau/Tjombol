@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.tjombol.DB.Entities.NoteEntity;
-import com.example.tjombol.Remote.Repositories.NoteRepository;
+import com.example.tjombol.remote.Repositories.NoteRepository;
 
 import java.util.List;
 

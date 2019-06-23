@@ -1,12 +1,12 @@
-package com.example.tjombol.Remote.Repositories.Service;
+package com.example.tjombol.remote;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import static com.example.tjombol.Remote.Repositories.Service.Status.ERROR;
-import static com.example.tjombol.Remote.Repositories.Service.Status.LOADING;
-import static com.example.tjombol.Remote.Repositories.Service.Status.SUCCESS;
+import static com.example.tjombol.remote.Status.ERROR;
+import static com.example.tjombol.remote.Status.LOADING;
+import static com.example.tjombol.remote.Status.SUCCESS;
 
 
 /**

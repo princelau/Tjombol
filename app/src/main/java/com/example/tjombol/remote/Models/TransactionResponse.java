@@ -1,4 +1,4 @@
-package com.example.tjombol.Remote.Models;
+package com.example.tjombol.remote.Models;
 
 import com.example.tjombol.DB.Entities.TxEntity;
 import com.google.gson.annotations.SerializedName;

@@ -4,7 +4,7 @@ import com.example.tjombol.Views.TransactionListFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
-
+//* This builder provides android injector service to fragments
 
 @Module
 public abstract class FragmentBuilderModule {
@@ -13,9 +13,11 @@ public abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
     abstract TransactionListFragment contributeTransactionListFragment();
 
+
     /*
     @SuppressWarnings("unused")
     @ContributesAndroidInjector
     abstract ArticleDetailFragment contributeArticleDetailFragment();
     */
 }
+

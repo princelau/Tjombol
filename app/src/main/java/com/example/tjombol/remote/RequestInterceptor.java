@@ -1,4 +1,4 @@
-package com.example.tjombol.Remote.Repositories.Service;
+package com.example.tjombol.remote;
 
 import androidx.annotation.NonNull;
 
@@ -25,7 +25,7 @@ public class RequestInterceptor implements Interceptor {
         HttpUrl originalHttpUrl = originalRequest.url();
 
         HttpUrl url = originalHttpUrl.newBuilder()
-                .addQueryParameter("api_key", ApiConstants.API_KEY)
+                //.addQueryParameter("api_key", ApiConstants.API_KEY)
                 .build();
 
         Request request = originalRequest.newBuilder().url(url).build();

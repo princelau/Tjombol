@@ -1,4 +1,4 @@
-package com.example.tjombol.Remote.Repositories.Service;
+package com.example.tjombol.remote;
 
 /**
  * Status of a resource that is provided to the UI.
