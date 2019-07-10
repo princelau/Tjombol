@@ -1,17 +1,16 @@
 package com.example.tjombol.Adapters;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tjombol.DB.Entities.TxEntity;
-import com.example.tjombol.R;
+import com.example.tjombol.databinding.TransactionCardBinding;
+import com.example.tjombol.db.TxEntity;
 import com.example.tjombol.Views.Base.BaseAdapter;
 import com.example.tjombol.Views.TransactionListFragment;
 
@@ -28,73 +27,43 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         this.mFragment = mFragment;
     }
 
+
+
     @Override
-    public void setData(List<TxEntity> data) {
-        this.transactions = data;
+    public void setData(List<TxEntity> transactions) {
+        this.transactions = transactions;
+        //Log.e("TX_ADAPTER", "setData() is called "+transactions.get(0).getReceiver());
         notifyDataSetChanged();
-    }
-
-    class TxViewHolder extends RecyclerView.ViewHolder
-    {
-        private TextView textViewId;
-        private TextView textViewSender;
-        private TextView textViewAmount;
-        private TextView textViewDate;
-        private TextView textViewComment;
-        private TextView textViewStatus;
-        private LinearLayout linearLayoutExtraInfo;
-
-        private TxViewHolder(View itemView)
-        {
-            super(itemView);
-            textViewId = itemView.findViewById(R.id.id);
-            textViewSender = itemView.findViewById(R.id.sender);
-            textViewAmount = itemView.findViewById(R.id.amount);
-            textViewDate = itemView.findViewById(R.id.date);
-            textViewComment = itemView.findViewById(R.id.comment);
-            textViewStatus = itemView.findViewById(R.id.status);
-            linearLayoutExtraInfo = itemView.findViewById(R.id.linearLayoutExtraInfo);
-        }
     }
 
     @NonNull
     @Override
     public TransactionAdapter.TxViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.transaction_card, parent, false);
-        return new TxViewHolder(itemView);
+        return TxViewHolder.create(LayoutInflater.from(parent.getContext()),parent);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final TransactionAdapter.TxViewHolder holder, int position) {
-
         TxEntity currentTransaction = transactions.get(position);
+        holder.onBind(currentTransaction);
 
         String amountWithType;
-
         //Set Text Color
         if (currentTransaction.getType().equals("INCOMING")) {
             //amountWithType = "<font color=#2ECC40>+$"+Integer.toString(transactionList.get(position).getAmount())+"</font>";
-            holder.textViewAmount.setTextColor(Color.parseColor("#47AD51"));
+            holder.binding.amount.setTextColor(Color.parseColor("#47AD51"));
             amountWithType = "+$"+Integer.toString(currentTransaction.getAmount());
         }
+
         else if (currentTransaction.getType().equals("OUTGOING")) {
-            holder.textViewAmount.setTextColor(Color.parseColor("#E03F35"));
+            holder.binding.amount.setTextColor(Color.parseColor("#E03F35"));
             amountWithType = "-$"+Integer.toString(currentTransaction.getAmount());
         }
         else{
-            holder.textViewAmount.setTextColor(Color.parseColor("#FF9800"));
+            holder.binding.amount.setTextColor(Color.parseColor("#FF9800"));
             amountWithType = "-$"+Integer.toString(currentTransaction.getAmount());
         }
-
-        //Write Text
-        holder.textViewId.setText(currentTransaction.getTransactionId());
-        holder.textViewSender.setText(currentTransaction.getSender());
-        holder.textViewAmount.setText(amountWithType);
-        holder.textViewDate.setText(currentTransaction.getDate());
-        holder.textViewComment.setText(currentTransaction.getComment());
-        holder.textViewStatus.setText(currentTransaction.getTransactionStatus());
 
         //Set onclick listener to each item
         holder.itemView.setOnClickListener(new View.OnClickListener()
@@ -108,13 +77,13 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
                     mFragment.togglePayslipPopup(view);
                 }
                 else {
-                    if (holder.linearLayoutExtraInfo.getVisibility() == View.GONE) {
+                    if (holder.binding.linearLayoutExtraInfo.getVisibility() == View.GONE) {
                         // it's collapsed - expand it
-                        holder.linearLayoutExtraInfo.setVisibility(View.VISIBLE);
+                        holder.binding.linearLayoutExtraInfo.setVisibility(View.VISIBLE);
                         //mDescriptionImg.setImageResource(R.drawable.ic_expand_less_black_24dp);
                     } else {
                         // it's expanded - collapse it
-                        holder.linearLayoutExtraInfo.setVisibility(View.GONE);
+                        holder.binding.linearLayoutExtraInfo.setVisibility(View.GONE);
                         //mDescriptionImg.setImageResource(R.drawable.ic_expand_more_black_24dp);
                     }
                     //animation here
@@ -128,13 +97,29 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         return transactions.size();
     }
 
-    // notify changes
-    /*
-    public void setTransactions(List<TxEntity> transactions){
-        this.transactions = transactions;
-        notifyDataSetChanged();
+    //Binding
+    static class TxViewHolder extends RecyclerView.ViewHolder
+    {
+        private static TxViewHolder create(LayoutInflater inflater,ViewGroup parent)
+        {
+            TransactionCardBinding transactionCardBinding = TransactionCardBinding
+                    .inflate(inflater,parent,false);
+            return new TxViewHolder(transactionCardBinding);
+
+        }
+
+        final TransactionCardBinding binding;
+
+        private TxViewHolder(TransactionCardBinding binding)
+        {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        private void onBind(TxEntity txEntity) {
+            binding.setTx(txEntity);
+            binding.executePendingBindings();
+        }
     }
-*/
-    // Modify view when click
 
 }

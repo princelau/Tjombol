@@ -1,13 +1,16 @@
 package com.example.tjombol.remote.Models;
 
-import com.example.tjombol.DB.Entities.TxEntity;
+import com.example.tjombol.db.TxEntity;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import retrofit2.http.Body;
+
 public class TransactionResponse {
 
-    @SerializedName("results")
+
+    @SerializedName("")
     private List<TxEntity> transactions;
 
     /**

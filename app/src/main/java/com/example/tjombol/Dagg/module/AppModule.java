@@ -4,8 +4,8 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-import com.example.tjombol.DB.DAOs.TransactionDao;
-import com.example.tjombol.DB.TxDatabase;
+import com.example.tjombol.db.DAOs.TransactionDao;
+import com.example.tjombol.db.TxDatabase;
 import com.example.tjombol.remote.ApiConstants;
 import com.example.tjombol.remote.ApiService;
 import com.example.tjombol.remote.RequestInterceptor;
@@ -57,7 +57,7 @@ public class AppModule {
     @Provides
     @Singleton
     TxDatabase provideTransactionDatabase(Application application) {
-        return Room.databaseBuilder(application, TxDatabase.class, "tx_database.db").build();
+        return Room.databaseBuilder(application, TxDatabase.class, "tx_database.db").fallbackToDestructiveMigration().build();
     }
 
     @Provides

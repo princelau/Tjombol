@@ -1,5 +1,5 @@
-package com.example.tjombol.DB;
-
+package com.example.tjombol.db;
+/*
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -9,10 +9,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.tjombol.DB.DAOs.NoteDao;
-import com.example.tjombol.DB.Entities.NoteEntity;
+import com.example.tjombol.db.DAOs.NoteDao;
 
-@Database(entities = {NoteEntity.class},version = 1)
+@Database(entities = {NoteEntity.class},version = 2)
 public abstract class NoteDatabase extends RoomDatabase {
 
     private static NoteDatabase instance;
@@ -52,3 +51,4 @@ public abstract class NoteDatabase extends RoomDatabase {
         }
     }
 }
+*/

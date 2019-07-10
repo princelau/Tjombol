@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tjombol.DB.Entities.TxEntity;
+import com.example.tjombol.db.TxEntity;
 import com.example.tjombol.R;
 
 import java.util.ArrayList;

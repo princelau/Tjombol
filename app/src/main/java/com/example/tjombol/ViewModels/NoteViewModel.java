@@ -1,12 +1,12 @@
 package com.example.tjombol.ViewModels;
-
+/*
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.tjombol.DB.Entities.NoteEntity;
+import com.example.tjombol.db.NoteEntity;
 import com.example.tjombol.remote.Repositories.NoteRepository;
 
 import java.util.List;
@@ -42,3 +42,4 @@ public class NoteViewModel extends AndroidViewModel {
         return allNotes;
     }
 }
+*/

@@ -1,12 +1,14 @@
 package com.example.tjombol.remote.Repositories;
 
+import android.app.Application;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import com.example.tjombol.DB.DAOs.TransactionDao;
-import com.example.tjombol.DB.Entities.TxEntity;
+import com.example.tjombol.db.DAOs.TransactionDao;
+import com.example.tjombol.db.TxEntity;
 import com.example.tjombol.remote.ApiService;
-import com.example.tjombol.remote.Models.TransactionResponse;
 import com.example.tjombol.remote.NetworkBoundResource;
 import com.example.tjombol.remote.Resource;
 
@@ -97,7 +99,7 @@ public class TransactionRepository {
     private final ApiService apiService;
 
     @Inject
-    TransactionRepository(TransactionDao transactionDao, ApiService service) {
+    TransactionRepository(TransactionDao transactionDao, ApiService service, Application application) {
         this.transactionDao = transactionDao;
         this.apiService = service;
     }
@@ -107,12 +109,14 @@ public class TransactionRepository {
      * @return List of transactions
      */
     public LiveData<Resource<List<TxEntity>>> loadTransactions() {
-        return new NetworkBoundResource<List<TxEntity>, TransactionResponse>() {
+        // resourceType and resultType
+        return new NetworkBoundResource<List<TxEntity>, List<TxEntity>>() {
 
             @Override
-            protected void saveCallResult(TransactionResponse item) {
+            protected void saveCallResult(List<TxEntity> item) {
                 if(null != item)
-                    transactionDao.saveTransactions(item.getTransactions());
+                    Log.d("TxRepository", "saveCallResult: "+item);
+                    transactionDao.saveTransactions(item);
             }
 
             @NonNull
@@ -123,7 +127,7 @@ public class TransactionRepository {
 
             @NonNull
             @Override
-            protected Call<TransactionResponse> createCall() {
+            protected Call<List<TxEntity>> createCall() {
                 return apiService.getTransactions();
             }
         }.getAsLiveData();

@@ -6,10 +6,12 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import com.example.tjombol.R;
 import com.example.tjombol.Views.Base.BaseActivity;
 import com.example.tjombol.databinding.ActivityMainBinding;
+import com.example.tjombol.db.TxDatabase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
@@ -23,11 +25,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
-
+        dataBinding.bottomNavigation.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

@@ -2,6 +2,7 @@ package com.example.tjombol.remote;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
@@ -28,16 +29,17 @@ import retrofit2.Response;
  * Created: 7/24/2018
  * Modified: 7/24/2018
  */
-public abstract class NetworkBoundResource<T, V> {
+public abstract class NetworkBoundResource<ResultType, ResourceType> {
 
-    private final MediatorLiveData<Resource<T>> result = new MediatorLiveData<>();
+    private static final String TAG = "NetworkBoundResource";
+    private final MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
 
     @MainThread
     protected NetworkBoundResource() {
         result.setValue(Resource.loading(null));
 
         // Always load the data from DB intially so that we have
-        LiveData<T> dbSource = loadFromDb();
+        LiveData<ResultType> dbSource = loadFromDb();
 
         // Fetch the data from network and add it to the resource
         result.addSource(dbSource, data -> {
@@ -57,19 +59,21 @@ public abstract class NetworkBoundResource<T, V> {
      * This method fetches the data from remoted service and save it to local db
      * @param dbSource - Database source
      */
-    private void fetchFromNetwork(final LiveData<T> dbSource) {
+    private void fetchFromNetwork(final LiveData<ResultType> dbSource) {
         result.addSource(dbSource, newData -> result.setValue(Resource.loading(newData)));
-        createCall().enqueue(new Callback<V>() {
+        createCall().enqueue(new Callback<ResourceType>() {
             @Override
-            public void onResponse(@NonNull Call<V> call, @NonNull Response<V> response) {
+            public void onResponse(@NonNull Call<ResourceType> call, @NonNull Response<ResourceType> response) {
                 result.removeSource(dbSource);
                 saveResultAndReInit(response.body());
+                Log.d(TAG, "onResponse: "+response.body());
             }
 
             @Override
-            public void onFailure(@NonNull Call<V> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<ResourceType> call, @NonNull Throwable t) {
                 result.removeSource(dbSource);
                 result.addSource(dbSource, newData -> result.setValue(Resource.error(getCustomErrorMessage(t), newData)));
+                Log.d(TAG, "onFailure: Nooooooooooooooooooo\n"+t.getMessage());
             }
         });
     }
@@ -85,14 +89,14 @@ public abstract class NetworkBoundResource<T, V> {
         } else if (error instanceof HttpException) {
             return (((HttpException) error).response().message());
         } else {
-            return TjombolApp.getAppContext().getString(R.string.unknownError);
+            return TjombolApp.getAppContext().getString(R.string.unknownError)+error.getLocalizedMessage();
         }
 
     }
 
     @SuppressLint("StaticFieldLeak")
     @MainThread
-    private void saveResultAndReInit(V response) {
+    private void saveResultAndReInit(ResourceType response) {
         new AsyncTask<Void, Void, Void>() {
 
             @Override
@@ -112,7 +116,7 @@ public abstract class NetworkBoundResource<T, V> {
     }
 
     @WorkerThread
-    protected abstract void saveCallResult(V item);
+    protected abstract void saveCallResult(ResourceType item);
 
     @MainThread
     private boolean shouldFetch() {
@@ -121,13 +125,13 @@ public abstract class NetworkBoundResource<T, V> {
 
     @NonNull
     @MainThread
-    protected abstract LiveData<T> loadFromDb();
+    protected abstract LiveData<ResultType> loadFromDb();
 
     @NonNull
     @MainThread
-    protected abstract Call<V> createCall();
+    protected abstract Call<ResourceType> createCall();
 
-    public final LiveData<Resource<T>> getAsLiveData() {
+    public final LiveData<Resource<ResultType>> getAsLiveData() {
         return result;
     }
 }

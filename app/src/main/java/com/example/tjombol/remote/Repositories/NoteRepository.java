@@ -1,13 +1,13 @@
 package com.example.tjombol.remote.Repositories;
-
+/*
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.tjombol.DB.DAOs.NoteDao;
-import com.example.tjombol.DB.Entities.NoteEntity;
-import com.example.tjombol.DB.NoteDatabase;
+import com.example.tjombol.db.DAOs.NoteDao;
+import com.example.tjombol.db.NoteEntity;
+import com.example.tjombol.db.NoteDatabase;
 
 import java.util.List;
 
@@ -103,3 +103,4 @@ public class NoteRepository {
         }
     }
 }
+*/

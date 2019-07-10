@@ -1,5 +1,5 @@
-package com.example.tjombol.DB.Entities;
-
+package com.example.tjombol.db;
+/*
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -38,3 +38,4 @@ public class NoteEntity {
     }
 
 }
+*/

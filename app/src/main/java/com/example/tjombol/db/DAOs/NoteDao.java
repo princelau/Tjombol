@@ -1,5 +1,5 @@
-package com.example.tjombol.DB.DAOs;
-
+package com.example.tjombol.db.DAOs;
+/*
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.tjombol.DB.Entities.NoteEntity;
+import com.example.tjombol.db.NoteEntity;
 
 import java.util.List;
 
@@ -29,3 +29,4 @@ public interface NoteDao {
     @Query("SELECT * FROM note_table ORDER BY priority DESC")
     LiveData<List<NoteEntity>> getAllNotes();
 }
+*/

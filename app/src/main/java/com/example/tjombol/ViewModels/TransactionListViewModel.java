@@ -3,7 +3,7 @@ package com.example.tjombol.ViewModels;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.tjombol.DB.Entities.TxEntity;
+import com.example.tjombol.db.TxEntity;
 import com.example.tjombol.remote.Resource;
 import com.example.tjombol.remote.Repositories.TransactionRepository;
 
@@ -18,7 +18,7 @@ public class TransactionListViewModel extends ViewModel {
     TransactionRepository transactionRepository;
     // Rest of the ViewModel...
     @Inject
-    public TransactionListViewModel(TransactionRepository transactionRepository) {
+    TransactionListViewModel(TransactionRepository transactionRepository) {
         transactionsObservable = transactionRepository.loadTransactions();
     }
 

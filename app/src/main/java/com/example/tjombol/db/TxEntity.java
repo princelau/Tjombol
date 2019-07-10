@@ -1,5 +1,6 @@
-package com.example.tjombol.DB.Entities;
+package com.example.tjombol.db;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,7 +9,12 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "tx_table")
 public class TxEntity {
 
+    //@PrimaryKey(autoGenerate = true)
+    //private int id;
+
     @PrimaryKey(autoGenerate = true)
+    private int id;
+
     @SerializedName("txId")
     private int transactionId;
 
@@ -31,8 +37,15 @@ public class TxEntity {
         this.amount = amount;
         this.date = date;
         this.comment = comment;
-        this.priority = Integer.valueOf(transactionId);
+        this.priority = transactionId;
     }
+
+    public int getId(){return id; }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public int getTransactionId() {
         return transactionId;

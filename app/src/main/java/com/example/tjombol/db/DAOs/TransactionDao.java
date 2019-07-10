@@ -1,4 +1,4 @@
-package com.example.tjombol.DB.DAOs;
+package com.example.tjombol.db.DAOs;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -7,8 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.tjombol.DB.Entities.NoteEntity;
-import com.example.tjombol.DB.Entities.TxEntity;
+import com.example.tjombol.db.TxEntity;
 
 import java.util.List;
 

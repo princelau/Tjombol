@@ -5,6 +5,7 @@ package com.example.tjombol.Views;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,21 +37,7 @@ import dagger.android.support.AndroidSupportInjection;
 //First to be implement
 //public class TransactionListFragment extends BaseFragment<TransactionListViewModel, FragmentTransactionsBinding> {
 //
-public class TransactionListFragment extends Fragment{
-    @Inject
-    ViewModelProvider.Factory viewModelFactory;
-
-    protected TransactionListViewModel viewModel;
-
-    protected FragmentTransactionsBinding dataBinding;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        AndroidSupportInjection.inject(this);
-        super.onCreate(savedInstanceState);
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel());
-    }
-
+public class TransactionListFragment extends BaseFragment<TransactionListViewModel,FragmentTransactionsBinding>{
     //
     private PopupWindow popUp = null;
 
@@ -64,20 +51,41 @@ public class TransactionListFragment extends Fragment{
         return R.layout.fragment_transactions;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
         // Set Recycler View
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        //final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        // Setup Adapter
+        TransactionAdapter transactionAdapter = new TransactionAdapter(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
+
 
         dataBinding.recyclerView.setLayoutManager(layoutManager);
         dataBinding.recyclerView.addItemDecoration(new LineDividerRecyclerView(getActivity()));
-
-        // Setup Adapter
-        TransactionAdapter transactionAdapter = new TransactionAdapter(this);
         dataBinding.recyclerView.setAdapter(transactionAdapter);
+
+        //
+        viewModel.getTransactionsObservable()
+                .observe(this, listResource ->  {
+                    if(null != listResource && (listResource.status == Status.ERROR || listResource.status == Status.SUCCESS)){
+                        dataBinding.progressBarLoading.setVisibility(View.GONE);
+                    }
+                    //transactionAdapter.setTransactions(listResource.data);
+                    Log.d("TxListFrag", "onCreateView: "+listResource.data);
+                    dataBinding.setResource(listResource);
+                    // If the cached data is already showing then no need to show the error
+                    if(null != dataBinding.recyclerView.getAdapter() && dataBinding.recyclerView.getAdapter().getItemCount() > 0){
+                        dataBinding.errorText.setVisibility(View.GONE);
+                    }
+                });
         return dataBinding.getRoot();
     }
 
@@ -87,18 +95,7 @@ public class TransactionListFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         // Live data is lifecycle aware, and it will only update our activity if it is in foreground
 
-        viewModel.getTransactionsObservable()
-                .observe(this, listResource ->  {
-                    if(null != listResource && (listResource.status == Status.ERROR || listResource.status == Status.SUCCESS)){
-                        dataBinding.progressBarLoading.setVisibility(View.GONE);
-                    }
-                    //transactionAdapter.setTransactions(listResource.data);
-                    dataBinding.setResource(listResource);
-                    // If the cached data is already showing then no need to show the error
-                    if(null != dataBinding.recyclerView.getAdapter() && dataBinding.recyclerView.getAdapter().getItemCount() > 0){
-                        dataBinding.errorText.setVisibility(View.GONE);
-                    }
-                });
+
     }
     /**
     public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
@@ -287,6 +284,7 @@ public class TransactionListFragment extends Fragment{
     void closePopUp() {
         if (popUp != null) {
             popUp.dismiss();
+
         }
     }
 }
