@@ -1,8 +1,11 @@
 package com.example.tjombol.Views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +30,10 @@ public class SignupStep1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_signup_step1, container, false);
 
+        nameEditText = view.findViewById(R.id.nameSignupEditText);
+        emailEditText = view.findViewById(R.id.emailSignupEditText);
+        passwordEditText = view.findViewById(R.id.passwordSignupEditText);
+
         goToLoginButton = view.findViewById(R.id.goToLoginButton);
         goToLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,8 +48,13 @@ public class SignupStep1Fragment extends Fragment {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ViewPager vp = getActivity().findViewById(R.id.nonSwipeViewPager);
-                vp.setCurrentItem(vp.getCurrentItem()+1);
+                if (checkDataEntered()) {
+                    String[] dataArray = new String[] {nameEditText.getText().toString(),emailEditText.getText().toString(), passwordEditText.getText().toString()};
+                    dataPasser.onDataPass(dataArray);
+                    ViewPager vp = getActivity().findViewById(R.id.nonSwipeViewPager);
+                    vp.setCurrentItem(vp.getCurrentItem() + 1);
+                }
+
             }
         });
 
@@ -50,11 +62,67 @@ public class SignupStep1Fragment extends Fragment {
         goToLoginButton.setText(Html.fromHtml(text));
 
 
-        nameEditText = view.findViewById(R.id.nameSignupEditText);
-        emailEditText = view.findViewById(R.id.emailSignupEditText);
-        passwordEditText = view.findViewById(R.id.passwordSignupEditText);
 
         return view;
     }
+
+
+
+    OnDataPass dataPasser;
+
+    public interface OnDataPass {
+        public void onDataPass(String[] data);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        dataPasser = (OnDataPass) context;
+    }
+
+
+
+
+
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+
+    boolean isEmail(EditText text) {
+        CharSequence email = text.getText().toString();
+        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    }
+
+    boolean isValidPasswordLength(EditText text) {
+        CharSequence str = text.getText().toString();
+        return (str.length() > 7);
+    }
+
+    boolean checkDataEntered() {
+        boolean ableToLogIn = true;
+
+        if (isEmpty(nameEditText)) {
+            nameEditText.setError("Please enter your name!");
+            ableToLogIn = false;
+        }
+
+
+        if (!isEmail(emailEditText)) {
+            emailEditText.setError("Enter a valid email!");
+            ableToLogIn = false;
+        }
+        if (!isValidPasswordLength(passwordEditText)) {
+            passwordEditText.setError("Password has to be at least 8 characters");
+            ableToLogIn = false;
+        }
+
+        if (isEmpty(passwordEditText)) {
+            passwordEditText.setError("Please enter a password");
+            ableToLogIn = false;
+        }
+        return ableToLogIn;
+    }
+
 }
 

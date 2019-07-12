@@ -1,6 +1,7 @@
 package com.example.tjombol.Views;
 
 import android.os.Bundle;
+<<<<<<< HEAD:app/src/main/java/com/example/tjombol/Views/SignupActivity.java
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -10,10 +11,32 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.tjombol.R;
+=======
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+>>>>>>> master:app/src/main/java/com/example/tjombol/SignupActivity.java
 
-public class SignupActivity extends FragmentActivity {
+import java.util.Arrays;
+
+public class SignupActivity extends FragmentActivity implements SignupStep1Fragment.OnDataPass, SignupStep2Fragment.OnDataPass2, SignupStep3Fragment.OnDataPass3, SignupStep4Fragment.OnDataPass4 {
 
     private static final int NUM_PAGES = 5;
+
+    private String name;
+    private String email;
+    private String password;
+    private String mobileNumber;
+    private String nric;
+    private String bankAccountNumber;
+    private String companyId;
+    private String paymentScheme;
+    //private String companyPassword;
+    private String monthlySalary;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -88,5 +111,38 @@ public class SignupActivity extends FragmentActivity {
         }
     }
 
+    @Override
+    public void onDataPass(String[] data) {
+        name = data[0];
+        email = data[1];
+        password = data[2];
+    }
+
+    @Override
+    public void onDataPass2(String[] data) {
+        mobileNumber = data[0];
+        nric = data[1];
+        bankAccountNumber = data[2];
+        companyId = data[3];
+    }
+
+    @Override
+    public void onDataPass3(String[] data) {
+        paymentScheme = data[0];
+    }
+
+    @Override
+    public void onDataPass4(String[] data) {
+        monthlySalary = data[0];
+        /*Log.i("name",name);
+        Log.i("email",email);
+        Log.i("name",password);
+        Log.i("name",mobileNumber);
+        Log.i("name",nric);
+        Log.i("name",bankAccountNumber);
+        Log.i("name",companyId);
+        Log.i("name",monthlySalary);*/
+
+    }
 
 }
