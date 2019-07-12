@@ -2,13 +2,6 @@ package com.example.tjombol.Views;
 
 import android.os.Bundle;
 import android.os.Handler;
-<<<<<<< HEAD:app/src/main/java/com/example/tjombol/Views/ClaimSalaryFragment.java
-=======
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
->>>>>>> master:app/src/main/java/com/example/tjombol/ClaimSalaryFragment.java
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

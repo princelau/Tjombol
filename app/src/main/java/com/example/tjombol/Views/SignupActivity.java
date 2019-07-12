@@ -1,27 +1,13 @@
 package com.example.tjombol.Views;
 
 import android.os.Bundle;
-<<<<<<< HEAD:app/src/main/java/com/example/tjombol/Views/SignupActivity.java
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import com.example.tjombol.R;
-=======
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
->>>>>>> master:app/src/main/java/com/example/tjombol/SignupActivity.java
-
-import java.util.Arrays;
 
 public class SignupActivity extends FragmentActivity implements SignupStep1Fragment.OnDataPass, SignupStep2Fragment.OnDataPass2, SignupStep3Fragment.OnDataPass3, SignupStep4Fragment.OnDataPass4 {
 

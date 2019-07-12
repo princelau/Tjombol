@@ -1,18 +1,9 @@
 package com.example.tjombol.Views;
 
-<<<<<<< HEAD:app/src/main/java/com/example/tjombol/Views/SignupStep2Fragment.java
-import android.os.Bundle;
 
-=======
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.text.Html;
 import android.text.TextUtils;
-import android.util.Patterns;
->>>>>>> master:app/src/main/java/com/example/tjombol/SignupStep2Fragment.java
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

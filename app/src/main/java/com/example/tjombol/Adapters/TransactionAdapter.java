@@ -28,8 +28,6 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         this.mFragment = mFragment;
     }
 
-
-
     @Override
     public void setData(List<TxEntity> transactions) {
         this.transactions = transactions;
@@ -117,7 +115,6 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
             TransactionCardBinding transactionCardBinding = TransactionCardBinding
                     .inflate(inflater,parent,false);
             return new TxViewHolder(transactionCardBinding);
-
         }
 
         final TransactionCardBinding binding;

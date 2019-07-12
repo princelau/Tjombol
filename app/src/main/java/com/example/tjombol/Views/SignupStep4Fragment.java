@@ -3,12 +3,7 @@ package com.example.tjombol.Views;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD:app/src/main/java/com/example/tjombol/Views/SignupStep4Fragment.java
-=======
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
->>>>>>> master:app/src/main/java/com/example/tjombol/SignupStep4Fragment.java
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

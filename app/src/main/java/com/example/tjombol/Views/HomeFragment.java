@@ -4,18 +4,7 @@ import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-<<<<<<< HEAD:app/src/main/java/com/example/tjombol/Views/HomeFragment.java
-=======
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
->>>>>>> master:app/src/main/java/com/example/tjombol/HomeFragment.java
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
