@@ -17,6 +17,7 @@ public class TjombolApp extends Application implements HasActivityInjector {
     private static synchronized void setInstance(TjombolApp app) {
         sInstance = app;
     }
+
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingInjector;
 

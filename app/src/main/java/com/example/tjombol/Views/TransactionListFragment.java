@@ -29,6 +29,8 @@ import com.example.tjombol.Views.Base.BaseFragment;
 import com.example.tjombol.databinding.FragmentTransactionsBinding;
 import com.example.tjombol.remote.Status;
 
+import java.util.Objects;
+
 import javax.inject.Inject;
 
 import butterknife.OnClick;
@@ -79,7 +81,7 @@ public class TransactionListFragment extends BaseFragment<TransactionListViewMod
                         dataBinding.progressBarLoading.setVisibility(View.GONE);
                     }
                     //transactionAdapter.setTransactions(listResource.data);
-                    Log.d("TxListFrag", "onCreateView: "+listResource.data);
+                    //Log.d("TxListFrag", "onCreateView: "+listResource.data);
                     dataBinding.setResource(listResource);
                     // If the cached data is already showing then no need to show the error
                     if(null != dataBinding.recyclerView.getAdapter() && dataBinding.recyclerView.getAdapter().getItemCount() > 0){
@@ -253,7 +255,7 @@ public class TransactionListFragment extends BaseFragment<TransactionListViewMod
     public void togglePayslipPopup(View anchorView) {
 
         DisplayMetrics dm = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        Objects.requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         int width = dm.widthPixels - dm.widthPixels/20;
         int height = dm.heightPixels - dm.heightPixels/7;

@@ -6,15 +6,16 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Entity(tableName = "tx_table")
 public class TxEntity {
 
     //@PrimaryKey(autoGenerate = true)
     //private int id;
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-
+    @PrimaryKey
     @SerializedName("txId")
     private int transactionId;
 
@@ -25,10 +26,10 @@ public class TxEntity {
     private String type;
     private int amount;
     private String date;
-    private String comment;
+    private String comments;
     private int priority;
 
-    public TxEntity(int transactionId, String transactionStatus, String sender, String receiver, String type, int amount, String date, String comment) {
+    public TxEntity(int transactionId, String transactionStatus, String sender, String receiver, String type, int amount, String date, String comments) {
         this.transactionId = transactionId;
         this.transactionStatus = transactionStatus;
         this.sender = sender;
@@ -36,16 +37,18 @@ public class TxEntity {
         this.type = type;
         this.amount = amount;
         this.date = date;
-        this.comment = comment;
+        this.comments = comments;
         this.priority = transactionId;
+        //this.txInfo = Arrays.asList(transactionStatus,sender,receiver,type,String.valueOf(amount),date,comment);
     }
 
+    /*
     public int getId(){return id; }
 
     public void setId(int id) {
         this.id = id;
     }
-
+    */
 
     public int getTransactionId() {
         return transactionId;
@@ -103,12 +106,12 @@ public class TxEntity {
         this.date = date;
     }
 
-    public String getComment() {
-        return comment;
+    public String getComments() {
+        return comments;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setComments(String comment) {
+        this.comments = comments;
     }
 
     public int getPriority() {

@@ -49,7 +49,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-
                     return true;
                 }
     };

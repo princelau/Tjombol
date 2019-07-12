@@ -15,6 +15,7 @@ import com.example.tjombol.Views.Base.BaseAdapter;
 import com.example.tjombol.Views.TransactionListFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHolder, TxEntity> {
@@ -32,7 +33,6 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
     @Override
     public void setData(List<TxEntity> transactions) {
         this.transactions = transactions;
-        //Log.e("TX_ADAPTER", "setData() is called "+transactions.get(0).getReceiver());
         notifyDataSetChanged();
     }
 
@@ -48,30 +48,42 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         TxEntity currentTransaction = transactions.get(position);
         holder.onBind(currentTransaction);
 
+
+        Log.e("TX_ADAPTER", "setData() is called: /n"
+                + Arrays.toString(new String[]{currentTransaction.getTransactionStatus(),
+                currentTransaction.getSender(),
+                currentTransaction.getReceiver(),
+                currentTransaction.getType(),
+                String.valueOf(currentTransaction.getAmount()),
+                currentTransaction.getDate(),
+                currentTransaction.getDate(),
+                currentTransaction.getComments()}));
+
         String amountWithType;
         //Set Text Color
         if (currentTransaction.getType().equals("INCOMING")) {
-            //amountWithType = "<font color=#2ECC40>+$"+Integer.toString(transactionList.get(position).getAmount())+"</font>";
             holder.binding.amount.setTextColor(Color.parseColor("#47AD51"));
-            amountWithType = "+$"+Integer.toString(currentTransaction.getAmount());
+            amountWithType = "+$"+currentTransaction.getAmount();
         }
 
         else if (currentTransaction.getType().equals("OUTGOING")) {
             holder.binding.amount.setTextColor(Color.parseColor("#E03F35"));
-            amountWithType = "-$"+Integer.toString(currentTransaction.getAmount());
+            amountWithType = "-$"+ currentTransaction.getAmount();
         }
         else{
             holder.binding.amount.setTextColor(Color.parseColor("#FF9800"));
-            amountWithType = "-$"+Integer.toString(currentTransaction.getAmount());
+            amountWithType = "-$"+ currentTransaction.getAmount();
         }
+        // Set text after color change
+        holder.binding.amount.setText(amountWithType);
 
-        //Set onclick listener to each item
+        // Set onclick listener to each item
         holder.itemView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                //Toast.makeText(getActivity(), "Item " + position + " is clicked.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Item " + position + " is clicked.", Toast.LENGTH_SHORT).show();
 
                 if (currentTransaction.getType().equals("OUTGOING")) {
                     mFragment.togglePayslipPopup(view);
