@@ -13,18 +13,18 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Design.NoActionBar">
-        <activity android:name=".Views.MainActivity"></activity>
-        <activity android:name=".Views.Login">
+        <activity android:name=".views.MainActivity"></activity>
+        <activity android:name=".views.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.SignupActivity"></activity>
-        <activity android:name=".Views.ChangeEmail"></activity>
-        <activity android:name=".Views.ChangePassword"></activity>
-        <activity android:name=".Views.ChangeDetails"></activity>
+        <activity android:name=".views.SignupActivity"></activity>
+        <activity android:name=".views.ChangeEmail"></activity>
+        <activity android:name=".views.ChangePassword"></activity>
+        <activity android:name=".views.ChangeDetails"></activity>
     </application>
 
 </manifest>

@@ -4,8 +4,8 @@ package com.example.tjombol.Dagg.module;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tjombol.ViewModels.TransactionListViewModel;
-import com.example.tjombol.ViewModels.ViewModelFactory;
+import com.example.tjombol.viewModels.TransactionListViewModel;
+import com.example.tjombol.viewModels.ViewModelFactory;
 
 import dagger.Binds;
 import dagger.Module;

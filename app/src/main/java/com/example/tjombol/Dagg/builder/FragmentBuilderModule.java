@@ -1,6 +1,6 @@
 package com.example.tjombol.Dagg.builder;
 
-import com.example.tjombol.Views.TransactionListFragment;
+import com.example.tjombol.views.TransactionListFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

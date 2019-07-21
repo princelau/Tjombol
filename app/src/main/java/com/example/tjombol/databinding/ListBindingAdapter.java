@@ -4,7 +4,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tjombol.remote.Resource;
-import com.example.tjombol.Views.Base.BaseAdapter;
+import com.example.tjombol.views.Base.BaseAdapter;
 
 import java.util.List;
 

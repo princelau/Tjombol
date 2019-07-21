@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tjombol.databinding.TransactionCardBinding;
 import com.example.tjombol.db.TxEntity;
-import com.example.tjombol.Views.Base.BaseAdapter;
-import com.example.tjombol.Views.TransactionListFragment;
+import com.example.tjombol.views.Base.BaseAdapter;
+import com.example.tjombol.views.TransactionListFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,28 +76,22 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         holder.binding.amount.setText(amountWithType);
 
         // Set onclick listener to each item
-        holder.itemView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                // Toast.makeText(getActivity(), "Item " + position + " is clicked.", Toast.LENGTH_SHORT).show();
+        holder.itemView.setOnClickListener(view -> {
 
-                if (currentTransaction.getType().equals("OUTGOING")) {
-                    mFragment.togglePayslipPopup(view);
+            if (currentTransaction.getType().equals("OUTGOING")) {
+                mFragment.togglePayslipPopup(view);
+            }
+            else {
+                if (holder.binding.linearLayoutExtraInfo.getVisibility() == View.GONE) {
+                    // it's collapsed - expand it
+                    holder.binding.linearLayoutExtraInfo.setVisibility(View.VISIBLE);
+                    //mDescriptionImg.setImageResource(R.drawable.ic_expand_less_black_24dp);
+                } else {
+                    // it's expanded - collapse it
+                    holder.binding.linearLayoutExtraInfo.setVisibility(View.GONE);
+                    //mDescriptionImg.setImageResource(R.drawable.ic_expand_more_black_24dp);
                 }
-                else {
-                    if (holder.binding.linearLayoutExtraInfo.getVisibility() == View.GONE) {
-                        // it's collapsed - expand it
-                        holder.binding.linearLayoutExtraInfo.setVisibility(View.VISIBLE);
-                        //mDescriptionImg.setImageResource(R.drawable.ic_expand_less_black_24dp);
-                    } else {
-                        // it's expanded - collapse it
-                        holder.binding.linearLayoutExtraInfo.setVisibility(View.GONE);
-                        //mDescriptionImg.setImageResource(R.drawable.ic_expand_more_black_24dp);
-                    }
-                    //animation here
-                }
+                //animation here
             }
         });
     }
