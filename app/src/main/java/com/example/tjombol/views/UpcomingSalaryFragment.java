@@ -133,11 +133,11 @@ public class UpcomingSalaryFragment extends Fragment {
             String amountWithType="";
             if (transactionList.get(position).getType().equals("INCOMING")) {
                 holder.textViewAmount.setTextColor(ContextCompat.getColor(getActivity(),R.color.colorGreen));
-                amountWithType = "+$"+Integer.toString(transactionList.get(position).getAmount());
+                amountWithType = "+$"+transactionList.get(position).getAmount();
             }
             else if (transactionList.get(position).getType().equals("OUTGOING")) {
                 holder.textViewAmount.setTextColor(ContextCompat.getColor(getActivity(),R.color.colorRed));
-                amountWithType = "-$"+Integer.toString(transactionList.get(position).getAmount());
+                amountWithType = "-$"+transactionList.get(position).getAmount();
             }
             //holder.textViewId.setText(transactionList.get(position).getId());
             holder.textViewSender.setText(transactionList.get(position).getSender());

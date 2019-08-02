@@ -49,8 +49,6 @@ public class TransactionListFragment extends BaseFragment<TransactionListViewMod
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
-        // Set Recycler View
-        //final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         // Setup Adapter
         TransactionAdapter transactionAdapter = new TransactionAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -67,10 +65,7 @@ public class TransactionListFragment extends BaseFragment<TransactionListViewMod
                     if(null != listResource && (listResource.status == Status.ERROR || listResource.status == Status.SUCCESS)){
                         dataBinding.progressBarLoading.setVisibility(View.GONE);
                     }
-                    //transactionAdapter.setTransactions(listResource.data);
-                    //Log.d("TxListFrag", "onCreateView: "+listResource.data);
                     dataBinding.setResource(listResource);
-                    // If the cached data is already showing then no need to show the error
                     if(null != dataBinding.recyclerView.getAdapter() && dataBinding.recyclerView.getAdapter().getItemCount() > 0){
                         dataBinding.errorText.setVisibility(View.GONE);
                     }
@@ -83,8 +78,6 @@ public class TransactionListFragment extends BaseFragment<TransactionListViewMod
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Live data is lifecycle aware, and it will only update our activity if it is in foreground
-
-
     }
 
     public void togglePayslipPopup(View anchorView) {

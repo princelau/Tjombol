@@ -4,8 +4,10 @@ package com.example.tjombol.Dagg.module;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.tjombol.viewModels.HomeFragmentViewModel;
 import com.example.tjombol.viewModels.TransactionListViewModel;
 import com.example.tjombol.viewModels.ViewModelFactory;
+import com.example.tjombol.views.HomeFragment;
 
 import dagger.Binds;
 import dagger.Module;

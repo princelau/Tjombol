@@ -67,7 +67,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1"
-                    android:text="@{Integer.toString(tx.amount)}"
+                    android:text="@{tx.amount}"
                     android:textAlignment="center"
                     android:textSize="25sp" />
 
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1"
-                    android:text="@{Integer.toString(tx.transactionId)}"
+                    android:text="@{String.valueOf(tx.transactionId)}"
                     android:textSize="18sp" />
 
                 <TextView
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1"
-                    android:text="@{tx.transactionStatus}"
+                    android:text="@{`Completed: `+String.valueOf(tx.transactionStatus==1)}"
                     android:textSize="18sp" />
             </LinearLayout>
 

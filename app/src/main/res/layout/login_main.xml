@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
-            name="loginview"
-            type="com.example.tjombol.viewModels.LoginViewModel"/>
+            name="LoginPresenter"
+            type="com.example.tjombol.views.LoginPresenter" />
+
         <variable
-            name="presenter"
-            type="com.example.tjombol.views.LoginPresenter"/>
+            name="LoginViewModel"
+            type="com.example.tjombol.viewModels.LoginViewModel" />
 
     </data>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
         tools:context=".views.Login">
 
         <ProgressBar
+            android:id="@+id/progess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/progess"
-            app:visibility="@{loginview.progressBar}"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,8 +57,8 @@
                     android:drawablePadding="15dp"
                     android:ems="13"
                     android:fontFamily="@font/montserrat"
-                    android:hint="Email"
-                    android:inputType="textPersonName"
+                    android:hint="@string/login_email"
+                    android:inputType="textEmailAddress"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
                     android:textColor="@android:color/white"
@@ -72,7 +73,7 @@
                     android:drawablePadding="15dp"
                     android:ems="13"
                     android:fontFamily="@font/montserrat"
-                    android:hint="Password"
+                    android:hint="@string/login_password"
                     android:inputType="textPassword"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
@@ -85,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:padding="3dp"
-                    android:text="@string/forgot_password"
+                    android:text="@string/login_forgot_password"
                     android:textAlignment="textEnd"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
@@ -98,10 +99,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60dp"
                     android:background="@drawable/primary_rounded_rectangle"
+                    android:onClick="@{() -> LoginPresenter.onClickLogin()}"
                     android:padding="12dp"
                     android:text="@string/login"
                     android:textColor="@android:color/white"
-                    android:onClick="@{(v)->presenter.loginData()}"
                     android:textSize="23sp"
                     app:fontFamily="@font/montserrat" />
 
@@ -110,14 +111,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:onClick="@{()-> LoginPresenter.onClickSignUp()}"
                     android:text="@string/no_account"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="16sp"
-                    android:onClick="@{(v)->presenter.onClickSignup()}"
-                    app:fontFamily="@font/montserrat"
-                    />
+                    app:fontFamily="@font/montserrat" />
 
 
             </LinearLayout>

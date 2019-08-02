@@ -20,6 +20,7 @@ import java.util.List;
 
 public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHolder, TxEntity> {
 
+    private static final String TAG = "TX_ADAPTER";
     private List<TxEntity> transactions;
     private TransactionListFragment mFragment;
 
@@ -47,24 +48,24 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         holder.onBind(currentTransaction);
 
 
-        Log.e("TX_ADAPTER", "setData() is called: /n"
-                + Arrays.toString(new String[]{currentTransaction.getTransactionStatus(),
+        Log.e(TAG, "setData() is called: /n"
+                + Arrays.toString(new String[]{String.valueOf(currentTransaction.getTransactionStatus()),
                 currentTransaction.getSender(),
                 currentTransaction.getReceiver(),
                 currentTransaction.getType(),
-                String.valueOf(currentTransaction.getAmount()),
+                currentTransaction.getAmount(),
                 currentTransaction.getDate(),
                 currentTransaction.getDate(),
                 currentTransaction.getComments()}));
 
         String amountWithType;
         //Set Text Color
-        if (currentTransaction.getType().equals("INCOMING")) {
+        if (currentTransaction.getTransactionStatus()==0) {
             holder.binding.amount.setTextColor(Color.parseColor("#47AD51"));
             amountWithType = "+$"+currentTransaction.getAmount();
         }
 
-        else if (currentTransaction.getType().equals("OUTGOING")) {
+        else if (currentTransaction.getTransactionStatus()==1) {
             holder.binding.amount.setTextColor(Color.parseColor("#E03F35"));
             amountWithType = "-$"+ currentTransaction.getAmount();
         }
@@ -78,7 +79,7 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         // Set onclick listener to each item
         holder.itemView.setOnClickListener(view -> {
 
-            if (currentTransaction.getType().equals("OUTGOING")) {
+            if (currentTransaction.getTransactionStatus() == 0) {
                 mFragment.togglePayslipPopup(view);
             }
             else {

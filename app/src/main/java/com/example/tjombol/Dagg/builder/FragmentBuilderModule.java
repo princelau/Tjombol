@@ -1,5 +1,6 @@
 package com.example.tjombol.Dagg.builder;
 
+import com.example.tjombol.views.HomeFragment;
 import com.example.tjombol.views.TransactionListFragment;
 
 import dagger.Module;
@@ -12,7 +13,6 @@ public abstract class FragmentBuilderModule {
     @SuppressWarnings("unused")
     @ContributesAndroidInjector
     abstract TransactionListFragment contributeTransactionListFragment();
-
 
     /*
     @SuppressWarnings("unused")

@@ -1,10 +1,20 @@
 <resources>
+
     <string name="app_name">Tjombol</string>
     <string name="username">Username</string>
-    <string name="password">Password</string>
+
+    <!--Login Activity View-->
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
     <string name="login">LOG IN</string>
     <string name="signup">SIGN UP</string>
-    <string name="forgot_password">Forgot your password?</string>
+    <string name="sign_up_text"><![CDATA[<font color=#ffffff>Don\'t have an account? </font> <font color=#67d6d3>Sign Up</font>]]></string>
+
+    <string name="login_email_error">Wrong Email</string>
+    <string name="login_password_error">Empty Password</string>
+    <string name="login_authentication_error">Authentication Failed</string>
+
+    <string name="login_forgot_password">Forgot your password?</string>
     <string name="no_account">Don\'t have an account? Sign Up</string>
     <string name="app_logo">App Logo</string>
     <string name="title_activity_main">MainActivity</string>
@@ -18,7 +28,7 @@
     <string name="wallet_balance_text">Wallet Balance</string>
     <string name="wallet_balance_number">$750</string>
 
-
+    <!--HomeFragment View-->
     <string name="home">Home</string>
     <string name="transactions">Transactions</string>
     <string name="profile">Profile</string>
@@ -44,5 +54,8 @@
 
     <string name="search_hint">Search Articles</string>
     <string name="action_search">Search</string>
+    <string name="password">Password</string>
+
+
 
 </resources>

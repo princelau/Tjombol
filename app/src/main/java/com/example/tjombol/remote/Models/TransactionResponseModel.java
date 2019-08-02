@@ -7,7 +7,7 @@ import java.util.List;
 
 import retrofit2.http.Body;
 
-public class TransactionResponse {
+public class TransactionResponseModel {
 
 
     @SerializedName("")

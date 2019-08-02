@@ -13,5 +13,6 @@ package com.example.tjombol.remote;
 public enum Status {
     SUCCESS,
     ERROR,
-    LOADING
+    LOADING,
+    INITIALIZING
 }

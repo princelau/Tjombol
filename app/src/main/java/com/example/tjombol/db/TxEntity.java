@@ -20,16 +20,27 @@ public class TxEntity {
     private int transactionId;
 
     @SerializedName("txStatus")
-    private String transactionStatus;
+    private int transactionStatus;
+
+    @SerializedName("oAccount")
     private String sender;
+
     private String receiver;
+
+    @SerializedName("productType")
     private String type;
-    private int amount;
+
+    private String amount;
+
+    @SerializedName("pDateTime")
     private String date;
+
+    @SerializedName("pPurpose")
     private String comments;
+
     private int priority;
 
-    public TxEntity(int transactionId, String transactionStatus, String sender, String receiver, String type, int amount, String date, String comments) {
+    public TxEntity(int transactionId, int transactionStatus, String sender, String receiver, String type, String amount, String date, String comments) {
         this.transactionId = transactionId;
         this.transactionStatus = transactionStatus;
         this.sender = sender;
@@ -39,16 +50,7 @@ public class TxEntity {
         this.date = date;
         this.comments = comments;
         this.priority = transactionId;
-        //this.txInfo = Arrays.asList(transactionStatus,sender,receiver,type,String.valueOf(amount),date,comment);
     }
-
-    /*
-    public int getId(){return id; }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    */
 
     public int getTransactionId() {
         return transactionId;
@@ -58,11 +60,11 @@ public class TxEntity {
         this.transactionId = transactionId;
     }
 
-    public String getTransactionStatus() {
+    public int getTransactionStatus() {
         return transactionStatus;
     }
 
-    public void setTransactionStatus(String transactionStatus) {
+    public void setTransactionStatus(int transactionStatus) {
         this.transactionStatus = transactionStatus;
     }
 
@@ -90,11 +92,11 @@ public class TxEntity {
         this.type = type;
     }
 
-    public int getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
