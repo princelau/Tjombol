@@ -1,53 +1,62 @@
 package com.example.tjombol.views;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.tjombol.db.TxEntity;
+import com.example.tjombol.Adapters.UpcomingAdapter;
+import com.example.tjombol.databinding.FragmentUpcomingSalaryBinding;
 import com.example.tjombol.R;
+import com.example.tjombol.remote.Status;
+import com.example.tjombol.viewModels.TransactionListViewModel;
+import com.example.tjombol.views.Base.BaseFragment;
 
-import java.util.ArrayList;
+public class UpcomingSalaryFragment extends BaseFragment<TransactionListViewModel, FragmentUpcomingSalaryBinding> {
 
-public class UpcomingSalaryFragment extends Fragment {
+    private static final String TAG = "Upcoming_Fragment";
 
+    @Override
+    protected Class<TransactionListViewModel> getViewModel() {
+        return TransactionListViewModel.class;
+    }
 
-    private TextView mTextViewEmpty;
-    private ProgressBar mProgressBarLoading;
-    private ImageView mImageViewEmpty;
-    private RecyclerView mRecyclerView;
-    private ListAdapter mListadapter;
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.fragment_upcoming_salary;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //return inflater.inflate(R.layout.fragment_upcoming_salary, container, false);
+        dataBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
 
-        View view = inflater.inflate(R.layout.fragment_upcoming_salary, container, false);
-
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        mTextViewEmpty = (TextView)view.findViewById(R.id.textViewEmpty);
-        mImageViewEmpty = (ImageView)view.findViewById(R.id.imageViewEmpty);
-        mProgressBarLoading = (ProgressBar)view.findViewById(R.id.progressBarLoading);
-
+        Log.d(TAG, "onCreateView: Upcoming Fragment");
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         //layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.addItemDecoration(new LineDividerRecyclerViewDark(getActivity()));
+        dataBinding.upComingRecyclerView.setLayoutManager(layoutManager);
+        dataBinding.upComingRecyclerView.addItemDecoration(new LineDividerRecyclerViewDark(getActivity()));
+
+        UpcomingAdapter upcomingAdapter = new UpcomingAdapter();
+        dataBinding.upComingRecyclerView.setAdapter(upcomingAdapter);
+        viewModel.getTransactionsObservable().observe(this, listResource ->  {
+            if(null != listResource && (listResource.status == Status.ERROR || listResource.status == Status.SUCCESS)){
+                dataBinding.progressBarLoading.setVisibility(View.GONE);
+            }
+            dataBinding.setResource(listResource);
+            if(null != dataBinding.upComingRecyclerView.getAdapter() && dataBinding.upComingRecyclerView.getAdapter().getItemCount() > 0){
+                //dataBinding.errorText.setVisibility(View.GONE);
+            }
+        });
+        //List<TxEntity> txlist = database.transactionDao().getAllTxsNormal();
 
         /*
         ArrayList data = new ArrayList<Transaction>();
@@ -71,17 +80,10 @@ public class UpcomingSalaryFragment extends Fragment {
         mListadapter = new ListAdapter(data);
         mRecyclerView.setAdapter(mListadapter);
         */
-        return view;
-
-
+        //new loadDataAsyncTask(database,mbinding);
+        return dataBinding.getRoot();
     }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
+    /*
     public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
     {
         private ArrayList<TxEntity> transactionList;
@@ -131,12 +133,12 @@ public class UpcomingSalaryFragment extends Fragment {
         public void onBindViewHolder(final ListAdapter.ViewHolder holder, final int position)
         {
             String amountWithType="";
-            if (transactionList.get(position).getType().equals("INCOMING")) {
+            if (transactionList.get(position).getTransactionStatus() == 3) {
                 holder.textViewAmount.setTextColor(ContextCompat.getColor(getActivity(),R.color.colorGreen));
                 amountWithType = "+$"+transactionList.get(position).getAmount();
             }
-            else if (transactionList.get(position).getType().equals("OUTGOING")) {
-                holder.textViewAmount.setTextColor(ContextCompat.getColor(getActivity(),R.color.colorRed));
+            else if (transactionList.get(position).getTransactionStatus() == 4) {
+                holder.textViewAmount.setTextColor(ContextCompat.getColor(getActivity(),R.color.colorAccent));
                 amountWithType = "-$"+transactionList.get(position).getAmount();
             }
             //holder.textViewId.setText(transactionList.get(position).getId());
@@ -166,6 +168,6 @@ public class UpcomingSalaryFragment extends Fragment {
         }
 
 
-    }
+    }*/
 
 }

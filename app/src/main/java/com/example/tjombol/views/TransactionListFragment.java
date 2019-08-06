@@ -27,7 +27,6 @@ import com.example.tjombol.views.Base.BaseFragment;
 import com.example.tjombol.databinding.FragmentTransactionsBinding;
 import com.example.tjombol.remote.Status;
 
-import java.util.Locale;
 import java.util.Objects;
 
 

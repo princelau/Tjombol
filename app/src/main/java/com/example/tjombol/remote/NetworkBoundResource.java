@@ -39,7 +39,7 @@ public abstract class NetworkBoundResource<ResultType, ResourceType> {
         result.setValue(Resource.loading(null));
 
         // Always load the data from DB intially so that we have
-        LiveData<ResultType> dbSource = loadFromDb();
+        LiveData<ResultType> dbSource = loadAllTxFromDb();
 
         // Fetch the data from network and add it to the resource
         result.addSource(dbSource, data -> {
@@ -113,7 +113,7 @@ public abstract class NetworkBoundResource<ResultType, ResourceType> {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                result.addSource(loadFromDb(), newData -> {
+                result.addSource(loadAllTxFromDb(), newData -> {
                     if (null != newData)
                         result.setValue(Resource.success(newData));
                 });
@@ -131,7 +131,7 @@ public abstract class NetworkBoundResource<ResultType, ResourceType> {
 
     @NonNull
     @MainThread
-    protected abstract LiveData<ResultType> loadFromDb();
+    protected abstract LiveData<ResultType> loadAllTxFromDb();
 
     @NonNull
     @MainThread

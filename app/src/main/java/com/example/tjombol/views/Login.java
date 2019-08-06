@@ -52,6 +52,7 @@ public class Login extends AppCompatActivity implements LoginPresenter{
                         result.data.getSalary(),
                         result.data.geteId(),
                         result.data.getRate(),
+                        result.data.getmBalance(),
                         result.data.getCompanyName()
                 );
                 //saveUserLoginData(result.data);

@@ -1,17 +1,27 @@
 package com.example.tjombol.views;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.example.tjombol.R;
+import com.example.tjombol.remote.Status;
+import com.example.tjombol.viewModels.LoginViewModel;
+import com.example.tjombol.viewModels.RegisterViewModel;
 
 public class SignupActivity extends FragmentActivity implements SignupStep1Fragment.OnDataPass, SignupStep2Fragment.OnDataPass2, SignupStep3Fragment.OnDataPass3, SignupStep4Fragment.OnDataPass4 {
 
     private static final int NUM_PAGES = 5;
+    private static final String TAG = "RegisterView";
+    private RegisterViewModel registerViewModel;
 
     private String name;
     private String email;
@@ -21,6 +31,7 @@ public class SignupActivity extends FragmentActivity implements SignupStep1Fragm
     private String bankAccountNumber;
     private String companyId;
     private String paymentScheme;
+    private final String scheme = "flatline";
     //private String companyPassword;
     private String monthlySalary;
 
@@ -44,6 +55,27 @@ public class SignupActivity extends FragmentActivity implements SignupStep1Fragm
         mPager = (ViewPager) findViewById(R.id.nonSwipeViewPager);
         pagerAdapter = new MyPageAdapter(getSupportFragmentManager());
         mPager.setAdapter(pagerAdapter);
+        registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
+        registerViewModel.init();
+
+        //Transfer to MainActivity upon valid response
+        registerViewModel.getRegisterDataObservable(null,null,null,null,null,null,null,null, null).observe(this, result -> {
+            //loginMainBinding.progess.setVisibility(View.GONE);
+            if(result!=null && result.status == Status.SUCCESS && result.data !=null) {
+                Log.d(TAG, "onCreate: result status: "+result.status);
+                //saveUserLoginData(result.data);
+                //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                //startActivity(intent);
+                Toast.makeText(getApplicationContext(), String.format("Registration success, token:%s",result.data.getToken()), Toast.LENGTH_SHORT).show();
+            } else{
+                if(result!=null && result.status == Status.INITIALIZING){
+                    Log.d(TAG, "onCreate: result: "+result.getMessage());
+                }else {
+                    Log.d(TAG, "onCreate: shit happens "+result.getMessage());
+                    Toast.makeText(getApplicationContext(), result.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -102,6 +134,7 @@ public class SignupActivity extends FragmentActivity implements SignupStep1Fragm
         name = data[0];
         email = data[1];
         password = data[2];
+        Toast.makeText(getApplicationContext(),name,Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -110,11 +143,13 @@ public class SignupActivity extends FragmentActivity implements SignupStep1Fragm
         nric = data[1];
         bankAccountNumber = data[2];
         companyId = data[3];
+        Log.d(TAG, "onDataPass2: Registering");
     }
 
     @Override
     public void onDataPass3(String[] data) {
         paymentScheme = data[0];
+        Log.d(TAG, "onDataPass3: Registering");
     }
 
     @Override
@@ -128,6 +163,8 @@ public class SignupActivity extends FragmentActivity implements SignupStep1Fragm
         Log.i("name",bankAccountNumber);
         Log.i("name",companyId);
         Log.i("name",monthlySalary);*/
+        Log.d(TAG, "onDataPass4: Registering");
+        registerViewModel.getRegisterDataObservable(companyId,nric,name,email,bankAccountNumber,mobileNumber,scheme,password, monthlySalary);
 
     }
 

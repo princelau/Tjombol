@@ -1,16 +1,15 @@
 package com.example.tjombol.views;
 
 import android.animation.ObjectAnimator;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,22 +20,20 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.tjombol.Adapters.HomeAdapter;
 import com.example.tjombol.R;
 import com.example.tjombol.databinding.FragmentHomeBinding;
-import com.example.tjombol.viewModels.HomeFragmentViewModel;
+import com.example.tjombol.remote.UserConstant;
+
+import java.util.Date;
 
 public class HomeFragment extends Fragment {
 
-    private static final String TAG = "HomeFragment View";
-    private static final String SHARED_PREFS = "user_data";
-    private static final String USER_ACCOUNT = "rAccount";
-    private final int PROGRESSBAR_DURATION = 5000;
     private String amountWithdraw;
     private FragmentHomeBinding dataBinding;
+    private UserConstant userConstant;
     //private HomeFragmentViewModel homeFragmentViewModel;
 
     @Nullable
@@ -48,12 +45,9 @@ public class HomeFragment extends Fragment {
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
         dataBinding.tabLayout.setupWithViewPager(viewPager);
-        // Get shared user account data from login activity - has problem
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_data",
-                Context.MODE_PRIVATE);
-        final String userAccount = sharedPreferences.getString(SHARED_PREFS,USER_ACCOUNT);
         // UI setup
-        setupUI(sharedPreferences);
+        userConstant = UserConstant.getInstance();
+        setupUI(userConstant);
         dataBinding.claimSalaryButton.setOnClickListener(v -> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -100,37 +94,37 @@ public class HomeFragment extends Fragment {
             builder.show();
 
         });
-
-        // ViewModel
-        //homeFragmentViewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel.class);
-        //homeFragmentViewModel.init();
-
-
         return dataBinding.getRoot();
     }
 
     /* Setups */
     // Initiate three progress bar in the main view
-    private void setupUI(SharedPreferences sharedPreferences){
+    private void setupUI(UserConstant userConstant){
         /* ProgressBar Paid = money paid(green)/month salary */
+        Date d = new Date();
+        CharSequence s  = DateFormat.format("MMMM d, yyyy ", d.getTime());
+        dataBinding.moneyToday.setText(userConstant.getUser_balance());
+        dataBinding.dateTextView.setText(s);
+
         int progress = 10;
         String strProgress = progress + "%";
         dataBinding.progressBarPaidPercent.setText(strProgress);
-        dataBinding.progressBarPaidNumber.setText(sharedPreferences.getString("mSalary", "")+"/"+ sharedPreferences.getString("wBalance", ""));
+        dataBinding.progressBarPaidNumber.setText(String.format("%s/%s",userConstant.getUser_balance(),userConstant.getUser_salary()));
         ObjectAnimator animationPaid = ObjectAnimator.ofInt(dataBinding.progressBarPaid, "progress", 0, 100); // see this max value coming back here, we animate towards that value
+        int PROGRESSBAR_DURATION = 5000;
         animationPaid.setDuration(PROGRESSBAR_DURATION); // in milliseconds
         animationPaid.setInterpolator(new DecelerateInterpolator());
         animationPaid.start();
         /* ProgressBar Drawable = requested(red num)/month salary*/
         dataBinding.progressBarDrawablePercent.setText(strProgress);
-        dataBinding.progressBarDrawableNumber.setText(sharedPreferences.getString("mSalary", "")+"/"+ sharedPreferences.getString("wBalance", ""));
+        dataBinding.progressBarDrawableNumber.setText(String.format("%s/%s",userConstant.getUser_balance(),userConstant.getUser_salary()));
         ObjectAnimator animationDrawable = ObjectAnimator.ofInt(dataBinding.progressBarDrawable, "progress", 0, 500); // see this max value coming back here, we animate towards that value
         animationDrawable.setDuration(PROGRESSBAR_DURATION); // in milliseconds
         animationDrawable.setInterpolator(new DecelerateInterpolator());
         animationDrawable.start();
         /* ProgressBar Percentage = overtime (0/0) */
         dataBinding.progressBarOutstandingPercent.setText(strProgress);
-        dataBinding.progressBarOutstandingNumber.setText(sharedPreferences.getString("mSalary", "")+"/"+ sharedPreferences.getString("wBalance", ""));
+        dataBinding.progressBarOutstandingNumber.setText(String.format("%s/%s",userConstant.getUser_balance(),userConstant.getUser_salary()));
         ObjectAnimator animationOutstanding = ObjectAnimator.ofInt(dataBinding.progressBarOutstanding, "progress", 0, 500); // see this max value coming back here, we animate towards that value
         animationOutstanding.setDuration(PROGRESSBAR_DURATION); // in milliseconds
         animationOutstanding.setInterpolator(new DecelerateInterpolator());

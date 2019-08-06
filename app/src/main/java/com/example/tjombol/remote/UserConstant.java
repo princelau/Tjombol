@@ -8,6 +8,7 @@ public class UserConstant {
     private static String user_salary;
     private static String user_eId;
     private static String user_rate;
+    private static String user_balance;
     private static String company_Name;
     private static UserConstant instance;
 
@@ -17,16 +18,19 @@ public class UserConstant {
         }
         return instance;
     }
-    public void setUser_account(String new_user_account,String new_user_salary,String new_user_eId, String new_user_rate, String new_company_name) {
+    public void setUser_account(String new_user_account,String new_user_salary,String new_user_eId, String new_user_rate, String new_user_balance,String new_company_name) {
         user_account = new_user_account;
         user_salary = new_user_salary;
         user_eId = new_user_eId;
         user_rate = new_user_rate;
+        user_balance = new_user_balance;
         company_Name = new_company_name;
+
         Log.d(TAG, "setUser_account: "+user_account);
         Log.d(TAG, "setUser_salary: "+user_salary);
         Log.d(TAG, "setUser_eId: "+user_eId);
         Log.d(TAG, "setUser_rate: "+user_rate);
+        Log.d(TAG, "setUser_balance: "+user_balance);
         Log.d(TAG, "setComp_name: "+company_Name);
     }
 
@@ -48,5 +52,13 @@ public class UserConstant {
 
     public String getCompany_Name() {
         return company_Name;
+    }
+
+    public String getUser_balance() {
+        return user_balance;
+    }
+
+    public void setUser_balance(String new_balance) {
+        user_balance = new_balance;
     }
 }

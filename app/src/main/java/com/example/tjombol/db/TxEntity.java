@@ -1,5 +1,6 @@
 package com.example.tjombol.db;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -14,10 +15,10 @@ public class TxEntity {
 
     //@PrimaryKey(autoGenerate = true)
     //private int id;
-
+    @NonNull
     @PrimaryKey
     @SerializedName("txId")
-    private int transactionId;
+    private String transactionId;
 
     @SerializedName("txStatus")
     private int transactionStatus;
@@ -27,9 +28,6 @@ public class TxEntity {
 
     private String receiver;
 
-    @SerializedName("productType")
-    private String type;
-
     private String amount;
 
     @SerializedName("pDateTime")
@@ -38,25 +36,24 @@ public class TxEntity {
     @SerializedName("pPurpose")
     private String comments;
 
-    private int priority;
+    private String priority;
 
-    public TxEntity(int transactionId, int transactionStatus, String sender, String receiver, String type, String amount, String date, String comments) {
+    public TxEntity(String transactionId, int transactionStatus, String sender, String receiver, String amount, String date, String comments) {
         this.transactionId = transactionId;
         this.transactionStatus = transactionStatus;
         this.sender = sender;
         this.receiver = receiver;
-        this.type = type;
         this.amount = amount;
         this.date = date;
         this.comments = comments;
         this.priority = transactionId;
     }
 
-    public int getTransactionId() {
+    public String getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(int transactionId) {
+    public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
 
@@ -84,14 +81,6 @@ public class TxEntity {
         this.receiver = receiver;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getAmount() {
         return amount;
     }
@@ -116,11 +105,12 @@ public class TxEntity {
         this.comments = comments;
     }
 
-    public int getPriority() {
+    public String getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
+
 }

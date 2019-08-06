@@ -4,7 +4,10 @@ public class NormalResponseModel {
 
     private String msg;
 
-    public NormalResponseModel(String msg) {
+    private String wbalance;
+
+    public NormalResponseModel(String msg, String wbalance) {
+        this.wbalance = wbalance;
         this.msg = msg;
     }
 
@@ -14,5 +17,13 @@ public class NormalResponseModel {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getWbalance() {
+        return wbalance;
+    }
+
+    public void setWbalance(String mbalance) {
+        this.wbalance = mbalance;
     }
 }

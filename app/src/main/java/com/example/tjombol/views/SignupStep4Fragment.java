@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import com.example.tjombol.R;
 
 public class SignupStep4Fragment extends Fragment {
 
-
+    private static final String TAG = "SignupStep4Fragment";
     Button backButtonSignup4;
     Button createAccountButton;
 
@@ -48,9 +49,11 @@ public class SignupStep4Fragment extends Fragment {
             public void onClick(View v) {
                 if (checkDataEntered()) {
                     String[] dataArray = new String[] {monthlySalarySignupEditText.getText().toString()};
+                    Log.d(TAG, "onDataPass4: Registering");
                     dataPasser.onDataPass4(dataArray);
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
+                    // Check Valid
+                    //Intent intent = new Intent(getActivity(), Login.class);
+                    //startActivity(intent);
                 }
             }
         });

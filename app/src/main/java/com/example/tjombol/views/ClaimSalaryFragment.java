@@ -22,18 +22,19 @@ import androidx.lifecycle.ViewModelProviders;
 import com.ebanx.swipebtn.OnActiveListener;
 import com.ebanx.swipebtn.SwipeButton;
 import com.example.tjombol.R;
+import com.example.tjombol.remote.UserConstant;
 import com.example.tjombol.viewModels.ClaimSalaryViewModel;
 
 public class ClaimSalaryFragment extends Fragment {
 
-    SharedPreferences sharedPreferences;
     Button claimSalaryBackButton;
     SwipeButton claimSalaryButton;
-    private static final String TAG = "Login";
+    private static final String TAG = "Claim";
 
     String amountWithdrawString;
     int amountWithdraw;
-    private int prev_balance;
+    private float prev_balance;
+    private UserConstant userConstant;
 
     TextView generatedAmountRequested;
 
@@ -42,10 +43,8 @@ public class ClaimSalaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_claim_salary, container, false);
-
-        sharedPreferences = getContext().getSharedPreferences("user_data",
-                Context.MODE_PRIVATE);
-        prev_balance =  Integer.valueOf(sharedPreferences.getString("mSalary", ""));
+        userConstant = UserConstant.getInstance();
+        prev_balance = Float.valueOf(userConstant.getUser_balance());
 
         Bundle bundle = this.getArguments();
         if(bundle != null){
@@ -60,7 +59,7 @@ public class ClaimSalaryFragment extends Fragment {
             public void onChanged(String s) {
                 Log.d(TAG, "onChanged: ");
                 showToast(s);
-                sharedPreferences.edit().putString("wBalance",String.valueOf(prev_balance-amountWithdraw)).apply();
+                //sharedPreferences.edit().putString("wBalance",String.valueOf(prev_balance-amountWithdraw)).apply();
             }
         });
 
@@ -90,7 +89,7 @@ public class ClaimSalaryFragment extends Fragment {
                     @Override
                     public void run() {
                         //
-                        claimSalaryViewModel.getTransactionFeedBack("8498293",String.valueOf(amountWithdraw),"daily pay");
+                        claimSalaryViewModel.getTransactionFeedBack(userConstant.getUser_account(),String.valueOf(amountWithdraw));
 
                         // transfer scene
                         FragmentManager fragmentManager = getFragmentManager();

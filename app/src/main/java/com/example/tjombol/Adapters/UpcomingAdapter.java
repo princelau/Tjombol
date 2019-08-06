@@ -5,31 +5,32 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tjombol.databinding.TransactionCardBinding;
+import com.example.tjombol.databinding.TransactionCardSmallBinding;
 import com.example.tjombol.db.TxEntity;
 import com.example.tjombol.remote.UserConstant;
 import com.example.tjombol.views.Base.BaseAdapter;
-import com.example.tjombol.views.TransactionListFragment;
+import com.example.tjombol.views.UpcomingSalaryFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHolder, TxEntity> {
+public class UpcomingAdapter extends BaseAdapter<UpcomingAdapter.UpViewHolder, TxEntity> {
 
-    private static final String TAG = "TX_ADAPTER";
+    private static final String TAG = "Upcoming_Adapter";
     private List<TxEntity> transactions;
-    private TransactionListFragment mFragment;
+    //private UpcomingSalaryFragment mFragment;
     private UserConstant userConstant;
 
 
-    public TransactionAdapter(TransactionListFragment mFragment) {
+    public UpcomingAdapter() {
         transactions = new ArrayList<>();
-        this.mFragment = mFragment;
+        //this.mFragment = mFragment;
     }
 
     @Override
@@ -40,13 +41,13 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
 
     @NonNull
     @Override
-    public TransactionAdapter.TxViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UpcomingAdapter.UpViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return TxViewHolder.create(LayoutInflater.from(parent.getContext()), parent);
+        return UpViewHolder.create(LayoutInflater.from(parent.getContext()), parent);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final TransactionAdapter.TxViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final UpcomingAdapter.UpViewHolder holder, int position) {
         TxEntity currentTransaction = transactions.get(position);
         holder.onBind(currentTransaction);
         userConstant = UserConstant.getInstance();
@@ -66,23 +67,20 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         if (currentTransaction.getTransactionStatus() == 0) {
             Log.d(TAG, "txStatus: out of my account 0 pending");
             holder.binding.amount.setTextColor(Color.parseColor("#FF9800"));
-            holder.binding.status.setText("Pending");
+
             amountWithType = "$" + currentTransaction.getAmount();
         } else if (currentTransaction.getTransactionStatus() == 1) {
             Log.d(TAG, "txStatus: out of my account 1 completed");
             holder.binding.amount.setTextColor(Color.parseColor("#E03F35"));
-            holder.binding.status.setText("Sent");
             amountWithType = "-$" + currentTransaction.getAmount();
         } else {
             Log.d(TAG, "txStatus: into my account 0/1 from: " + userConstant.getCompany_Name());
             if (currentTransaction.getTransactionStatus() == 2) {
                 // Incoming
                 holder.binding.amount.setTextColor(Color.parseColor("#67d6d3"));
-                holder.binding.status.setText("Incoming");
             } else {
                 // transaction in
                 holder.binding.amount.setTextColor(Color.parseColor("#47AD51"));
-                holder.binding.status.setText("Received");
             }
             amountWithType = "+$" + currentTransaction.getAmount();
         }
@@ -90,22 +88,13 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         holder.binding.amount.setText(amountWithType);
         holder.binding.sender.setText(userConstant.getCompany_Name());
         // Set onclick listener to each item
-        holder.itemView.setOnClickListener(view -> {
 
-            if (currentTransaction.getTransactionStatus() == 1) {
-                Log.d(TAG, "onBindViewHolder: popUp");
-                mFragment.togglePayslipPopup(view, currentTransaction);
-            } else {
-                if (holder.binding.linearLayoutExtraInfo.getVisibility() == View.GONE) {
-                    // it's collapsed - expand it
-                    holder.binding.linearLayoutExtraInfo.setVisibility(View.VISIBLE);
-                    //mDescriptionImg.setImageResource(R.drawable.ic_expand_less_black_24dp);
-                } else {
-                    // it's expanded - collapse it
-                    holder.binding.linearLayoutExtraInfo.setVisibility(View.GONE);
-                    //mDescriptionImg.setImageResource(R.drawable.ic_expand_more_black_24dp);
-                }
-                //animation here
+        holder.itemView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Toast.makeText(holder.itemView.getContext(), "Item " + position + " is clicked.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -116,16 +105,16 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
     }
 
     //Binding
-    static class TxViewHolder extends RecyclerView.ViewHolder {
-        private static TxViewHolder create(LayoutInflater inflater, ViewGroup parent) {
-            TransactionCardBinding transactionCardBinding = TransactionCardBinding
+    static class UpViewHolder extends RecyclerView.ViewHolder {
+        private static UpViewHolder create(LayoutInflater inflater, ViewGroup parent) {
+            TransactionCardSmallBinding transactionCardSmallBinding = TransactionCardSmallBinding
                     .inflate(inflater, parent, false);
-            return new TxViewHolder(transactionCardBinding);
+            return new UpViewHolder(transactionCardSmallBinding);
         }
 
-        final TransactionCardBinding binding;
+        final TransactionCardSmallBinding binding;
 
-        private TxViewHolder(TransactionCardBinding binding) {
+        private UpViewHolder(TransactionCardSmallBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

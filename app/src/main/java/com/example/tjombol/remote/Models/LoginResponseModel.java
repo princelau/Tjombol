@@ -17,14 +17,17 @@ public class LoginResponseModel {
 
     private String companyName;
 
+    private String wBalance;
+
     private String token;
 
-    public LoginResponseModel(String userAccount, String salary, String eId, String token, String rate, String companyName) {
+    public LoginResponseModel(String userAccount, String salary, String eId, String token, String rate, String wBalance, String companyName) {
         this.userAccount = userAccount;
         this.salary = salary;
         this.eId = eId;
         this.token = token;
         this.rate = rate;
+        this.wBalance = wBalance;
         this.companyName = companyName;
     }
 
@@ -74,5 +77,13 @@ public class LoginResponseModel {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public String getmBalance() {
+        return wBalance;
+    }
+
+    public void setmBalance(String wBalance) {
+        this.wBalance = wBalance;
     }
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +19,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.tjombol.Adapters.UpcomingAdapter;
 import com.example.tjombol.R;
-import com.example.tjombol.remote.Models.UserInfoResponseModel;
-import com.example.tjombol.remote.Resource;
 import com.example.tjombol.viewModels.HomeFragmentViewModel;
-
 
 public class RecentTransactionsFragment extends Fragment {
 
-
+    private static final String TAG = "Recent_Fragment";
     private TextView mTextViewEmpty;
     private ProgressBar mProgressBarLoading;
     private ImageView mImageViewEmpty;
@@ -38,7 +37,7 @@ public class RecentTransactionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_recent_transactions, container, false);
-
+        Log.d(TAG, "onCreateView: Recent Fragment");
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.fragRecentRecyclerView);
         mTextViewEmpty = (TextView)view.findViewById(R.id.textViewEmpty);
@@ -51,8 +50,9 @@ public class RecentTransactionsFragment extends Fragment {
         mRecyclerView.addItemDecoration(new LineDividerRecyclerViewDark(getActivity()));
 
         // ViewModel
-
-/*
+        UpcomingAdapter upcomingAdapter = new UpcomingAdapter();
+        mRecyclerView.setAdapter(upcomingAdapter);
+        /*
         homeFragmentViewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel.class);
         homeFragmentViewModel.init();
         homeFragmentViewModel.getUserInfoObservable("7111111").observe(this, new Observer<Resource<UserInfoResponseModel>>() {
@@ -61,7 +61,9 @@ public class RecentTransactionsFragment extends Fragment {
                 userInfoResponseModelResource.data
             }
         });
+        */
 
+        /*
         ArrayList data = new ArrayList<Transaction>();
         for (int i = 0; i < TransactionInformation.idArray.length; i++)
 
@@ -84,7 +86,7 @@ public class RecentTransactionsFragment extends Fragment {
 
         mListadapter = new ListAdapter(data);
         mRecyclerView.setAdapter(mListadapter);
-*/
+        */
         return view;
 
 

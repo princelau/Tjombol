@@ -30,6 +30,9 @@ public interface TransactionDao {
     @Query("DELETE FROM tx_table")
     void deleteAlltxs();
 
-    @Query("SELECT * FROM tx_table ORDER BY priority ")
+    @Query("SELECT * FROM tx_table ORDER BY date ")
     LiveData<List<TxEntity>> getAllTxs();
+
+    @Query("SELECT * FROM tx_table ORDER BY date ")
+    List<TxEntity> getAllTxsNormal();
 }

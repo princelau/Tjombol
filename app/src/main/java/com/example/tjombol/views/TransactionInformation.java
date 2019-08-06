@@ -1,6 +1,6 @@
 package com.example.tjombol.views;
 
-/*
+
 public class TransactionInformation {
 
     public static String[] idArray = {"10000", "10001", "10002", "10003", "10004"};
@@ -13,4 +13,3 @@ public class TransactionInformation {
     public static String[] statusArray = {"Confirmed", "Confirmed", "Confirmed", "Confirmed", "Confirmed"};
 
 }
-*/

@@ -2,6 +2,7 @@ package com.example.tjombol.Dagg.builder;
 
 import com.example.tjombol.views.HomeFragment;
 import com.example.tjombol.views.TransactionListFragment;
+import com.example.tjombol.views.UpcomingSalaryFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -19,5 +20,7 @@ public abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
     abstract ArticleDetailFragment contributeArticleDetailFragment();
     */
+    @ContributesAndroidInjector
+    abstract UpcomingSalaryFragment contributeUpcomingSalaryFragment();
 }
 

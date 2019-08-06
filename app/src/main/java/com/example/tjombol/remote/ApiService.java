@@ -5,6 +5,7 @@ import com.example.tjombol.remote.Models.LoginModel;
 import com.example.tjombol.remote.Models.NormalResponseModel;
 import com.example.tjombol.remote.Models.RegisterModel;
 import com.example.tjombol.remote.Models.LoginResponseModel;
+import com.example.tjombol.remote.Models.RegisterResponseModel;
 import com.example.tjombol.remote.Models.TransactionModel;
 import com.example.tjombol.remote.Models.UserInfoResponseModel;
 
@@ -30,7 +31,7 @@ public interface ApiService {
     Call<LoginResponseModel> login(@Body LoginModel login);
 
     @POST("users/api/register")
-    Call<LoginResponseModel> register(@Body RegisterModel registerModel);
+    Call<RegisterResponseModel> register(@Body RegisterModel registerModel);
 
     @POST("users/api/addTx")
     Call<NormalResponseModel> addTx(@Body TransactionModel transactionModel);

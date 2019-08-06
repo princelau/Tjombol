@@ -24,7 +24,6 @@ public class TransactionRepository {
     private static final String TAG = "TxRepository";
     private final TransactionDao transactionDao;
     private final ApiService apiService;
-    private UserConstant userConstant;
     //private final LoginResponseModel userModel;
 
     @Inject
@@ -52,7 +51,7 @@ public class TransactionRepository {
 
             @NonNull
             @Override
-            protected LiveData<List<TxEntity>> loadFromDb() {
+            protected LiveData<List<TxEntity>> loadAllTxFromDb() {
                 return transactionDao.getAllTxs();
             }
 
