@@ -12,6 +12,7 @@ import com.example.tjombol.remote.ApiService;
 import com.example.tjombol.remote.Models.LoginResponseModel;
 import com.example.tjombol.remote.NetworkBoundResource;
 import com.example.tjombol.remote.Resource;
+import com.example.tjombol.remote.UserConstant;
 
 import java.util.List;
 
@@ -20,8 +21,10 @@ import javax.inject.Inject;
 import retrofit2.Call;
 
 public class TransactionRepository {
+    private static final String TAG = "TxRepository";
     private final TransactionDao transactionDao;
     private final ApiService apiService;
+    private UserConstant userConstant;
     //private final LoginResponseModel userModel;
 
     @Inject
@@ -43,7 +46,7 @@ public class TransactionRepository {
             @Override
             protected void saveCallResult(List<TxEntity> item) {
                 if(null != item)
-                    Log.d("TxRepository", "saveCallResult: "+item);
+                    Log.d(TAG, "saveCallResult: "+item);
                     transactionDao.saveTransactions(item);
             }
 
@@ -57,7 +60,9 @@ public class TransactionRepository {
             @Override
             protected Call<List<TxEntity>> createCall() {
                 //return apiService.getTransactions(userModel.getAccount());
-                return apiService.getTransactions();
+                UserConstant userConstant= UserConstant.getInstance();
+                Log.d(TAG, "createCall on user account: "+userConstant.getUser_account());
+                return apiService.getTransactions(userConstant.getUser_account());
             }
         }.getAsLiveData();
     }

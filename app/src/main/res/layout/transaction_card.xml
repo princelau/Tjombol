@@ -53,7 +53,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/montserrat"
                         android:maxLines="1"
-                        android:text="@{tx.date}"
+                        android:text="@{tx.date.replace(`.000Z`,``).replace(`T`,``)}"
                         android:textColor="@android:color/white"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1"
-                    android:text="@{String.valueOf(tx.transactionId)}"
+                    android:text="@{`#`+ String.valueOf(tx.transactionId)}"
                     android:textSize="18sp" />
 
                 <TextView
@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1"
-                    android:text="@{tx.comments}"
+                    android:text="@{`comment: `+tx.comments}"
                     android:textSize="18sp" />
 
                 <TextView
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1"
-                    android:text="@{`Completed: `+String.valueOf(tx.transactionStatus==1)}"
+                    android:text="@{`Status: `+String.valueOf(tx.transactionStatus==1)}"
                     android:textSize="18sp" />
             </LinearLayout>
 

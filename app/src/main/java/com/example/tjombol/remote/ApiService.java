@@ -19,11 +19,11 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     // get
-    @GET("users/api/tx")
-    Call<List<TxEntity>> getTransactions();
+    @GET("users/api/txOf")
+    Call<List<TxEntity>> getTransactions(@Query("rAccount")String userAccount);
 
-    @GET("users/api/")
-    Call<UserInfoResponseModel> getUserInfo(@Query("rAcount")String userAccount);
+    @GET("users/api")
+    Call<UserInfoResponseModel> getUserInfo(@Query("rAccount")String userAccount);
 
     // post
     @POST("users/api/login")

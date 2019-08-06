@@ -64,9 +64,15 @@ public abstract class NetworkBoundResource<ResultType, ResourceType> {
         createCall().enqueue(new Callback<ResourceType>() {
             @Override
             public void onResponse(@NonNull Call<ResourceType> call, @NonNull Response<ResourceType> response) {
-                result.removeSource(dbSource);
-                saveResultAndReInit(response.body());
-                Log.d(TAG, "onResponse: "+response.body());
+                if (response.body() == null) {
+                    result.removeSource(dbSource);
+                    result.addSource(dbSource, newData -> result.setValue(Resource.error(response.message(), newData)));
+                    Log.d(TAG, "onFailure: Nooooooooooooooooooo\n"+response.message());
+                }else {
+                    result.removeSource(dbSource);
+                    saveResultAndReInit(response.body());
+                    Log.d(TAG, "onResponse: " + response.body());
+                }
             }
 
             @Override

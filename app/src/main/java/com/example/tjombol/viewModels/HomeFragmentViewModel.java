@@ -11,7 +11,7 @@ import com.example.tjombol.remote.Resource;
 
 public class HomeFragmentViewModel extends ViewModel {
 
-    private static final String TAG = "LoginViewModel";
+    private static final String TAG = "HomeFragmentViewModel";
     private UserRepository userRepository;
 
     public void init(){

@@ -1,7 +1,6 @@
 package com.example.tjombol.views;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -12,12 +11,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.tjombol.R;
-import com.example.tjombol.remote.Models.LoginResponseModel;
 import com.example.tjombol.remote.Status;
+import com.example.tjombol.remote.UserConstant;
 import com.example.tjombol.viewModels.LoginViewModel;
 import com.example.tjombol.databinding.LoginMainBinding;
 
@@ -35,6 +33,7 @@ public class Login extends AppCompatActivity implements LoginPresenter{
         super.onCreate(savedInstanceState);
         //DataBinding
         String text = getString(R.string.sign_up_text);
+        UserConstant userConstant = new UserConstant();
         loginMainBinding = DataBindingUtil.setContentView(this, R.layout.login_main);
         loginMainBinding.setLoginPresenter(this);
         loginMainBinding.goToSignupButton.setText(Html.fromHtml(text));
@@ -48,7 +47,14 @@ public class Login extends AppCompatActivity implements LoginPresenter{
             loginMainBinding.progess.setVisibility(View.GONE);
             if(result!=null && result.status == Status.SUCCESS && result.data !=null) {
                 Log.d(TAG, "onCreate: result status: "+result.status);
-                saveUserLoginData(result.data);
+                userConstant.setUser_account(
+                        result.data.getUserAccount(),
+                        result.data.getSalary(),
+                        result.data.geteId(),
+                        result.data.getRate(),
+                        result.data.getCompanyName()
+                );
+                //saveUserLoginData(result.data);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             } else{
@@ -60,14 +66,6 @@ public class Login extends AppCompatActivity implements LoginPresenter{
                 }
             }
         });
-    }
-
-    private void saveUserLoginData(LoginResponseModel loginResponseModel){
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(TOKEN,loginResponseModel.getToken());
-        editor.putString(USER_ACCOUNT,loginResponseModel.getUserAccount());
-        editor.apply();
     }
 
     // OnClick Callbacks

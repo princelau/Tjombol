@@ -20,25 +20,24 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.tjombol.Adapters.HomeAdapter;
 import com.example.tjombol.R;
 import com.example.tjombol.databinding.FragmentHomeBinding;
 import com.example.tjombol.viewModels.HomeFragmentViewModel;
-import com.example.tjombol.views.Base.BaseFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment View";
     private static final String SHARED_PREFS = "user_data";
     private static final String USER_ACCOUNT = "rAccount";
+    private final int PROGRESSBAR_DURATION = 5000;
     private String amountWithdraw;
     private FragmentHomeBinding dataBinding;
+    //private HomeFragmentViewModel homeFragmentViewModel;
 
     @Nullable
     @Override
@@ -53,32 +52,8 @@ public class HomeFragment extends Fragment {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_data",
                 Context.MODE_PRIVATE);
         final String userAccount = sharedPreferences.getString(SHARED_PREFS,USER_ACCOUNT);
-
-        // Three progress bar in the main view
-        /* ProgressBar Paid */
-        int progress = 10;
-        String strProgress = progress + "%";
-        dataBinding.progressBarPaidPercent.setText(strProgress);
-        dataBinding.progressBarPaidNumber.setText(sharedPreferences.getString("mSalary", "")+"/"+ sharedPreferences.getString("wBalance", ""));
-        ObjectAnimator animationPaid = ObjectAnimator.ofInt(dataBinding.progressBarPaid, "progress", 0, 100); // see this max value coming back here, we animate towards that value
-        animationPaid.setDuration(5000); // in milliseconds
-        animationPaid.setInterpolator(new DecelerateInterpolator());
-        animationPaid.start();
-        /* ProgressBar Drawable */
-        dataBinding.progressBarDrawablePercent.setText(strProgress);
-        dataBinding.progressBarDrawableNumber.setText(sharedPreferences.getString("mSalary", "")+"/"+ sharedPreferences.getString("wBalance", ""));
-        ObjectAnimator animationDrawable = ObjectAnimator.ofInt(dataBinding.progressBarDrawable, "progress", 0, 500); // see this max value coming back here, we animate towards that value
-        animationDrawable.setDuration(5000); // in milliseconds
-        animationDrawable.setInterpolator(new DecelerateInterpolator());
-        animationDrawable.start();
-        /* ProgressBar Percentage */
-        dataBinding.progressBarOutstandingPercent.setText(strProgress);
-        dataBinding.progressBarOutstandingNumber.setText(sharedPreferences.getString("mSalary", "")+"/"+ sharedPreferences.getString("wBalance", ""));
-        ObjectAnimator animationOutstanding = ObjectAnimator.ofInt(dataBinding.progressBarOutstanding, "progress", 0, 500); // see this max value coming back here, we animate towards that value
-        animationOutstanding.setDuration(5000); // in milliseconds
-        animationOutstanding.setInterpolator(new DecelerateInterpolator());
-        animationOutstanding.start();
-
+        // UI setup
+        setupUI(sharedPreferences);
         dataBinding.claimSalaryButton.setOnClickListener(v -> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -126,45 +101,46 @@ public class HomeFragment extends Fragment {
 
         });
 
+        // ViewModel
+        //homeFragmentViewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel.class);
+        //homeFragmentViewModel.init();
+
+
         return dataBinding.getRoot();
     }
 
+    /* Setups */
+    // Initiate three progress bar in the main view
+    private void setupUI(SharedPreferences sharedPreferences){
+        /* ProgressBar Paid = money paid(green)/month salary */
+        int progress = 10;
+        String strProgress = progress + "%";
+        dataBinding.progressBarPaidPercent.setText(strProgress);
+        dataBinding.progressBarPaidNumber.setText(sharedPreferences.getString("mSalary", "")+"/"+ sharedPreferences.getString("wBalance", ""));
+        ObjectAnimator animationPaid = ObjectAnimator.ofInt(dataBinding.progressBarPaid, "progress", 0, 100); // see this max value coming back here, we animate towards that value
+        animationPaid.setDuration(PROGRESSBAR_DURATION); // in milliseconds
+        animationPaid.setInterpolator(new DecelerateInterpolator());
+        animationPaid.start();
+        /* ProgressBar Drawable = requested(red num)/month salary*/
+        dataBinding.progressBarDrawablePercent.setText(strProgress);
+        dataBinding.progressBarDrawableNumber.setText(sharedPreferences.getString("mSalary", "")+"/"+ sharedPreferences.getString("wBalance", ""));
+        ObjectAnimator animationDrawable = ObjectAnimator.ofInt(dataBinding.progressBarDrawable, "progress", 0, 500); // see this max value coming back here, we animate towards that value
+        animationDrawable.setDuration(PROGRESSBAR_DURATION); // in milliseconds
+        animationDrawable.setInterpolator(new DecelerateInterpolator());
+        animationDrawable.start();
+        /* ProgressBar Percentage = overtime (0/0) */
+        dataBinding.progressBarOutstandingPercent.setText(strProgress);
+        dataBinding.progressBarOutstandingNumber.setText(sharedPreferences.getString("mSalary", "")+"/"+ sharedPreferences.getString("wBalance", ""));
+        ObjectAnimator animationOutstanding = ObjectAnimator.ofInt(dataBinding.progressBarOutstanding, "progress", 0, 500); // see this max value coming back here, we animate towards that value
+        animationOutstanding.setDuration(PROGRESSBAR_DURATION); // in milliseconds
+        animationOutstanding.setInterpolator(new DecelerateInterpolator());
+        animationOutstanding.start();
+    }
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getChildFragmentManager());
+        HomeAdapter adapter = new HomeAdapter(getChildFragmentManager());
         adapter.addFragment(new RecentTransactionsFragment(), "Recent Transactions");
         adapter.addFragment(new UpcomingSalaryFragment(), "Upcoming Salary");
         viewPager.setAdapter(adapter);
-
     }
-
-    static class Adapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public Adapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
 }

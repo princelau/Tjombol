@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tjombol.databinding.TransactionCardBinding;
 import com.example.tjombol.db.TxEntity;
+import com.example.tjombol.remote.UserConstant;
 import com.example.tjombol.views.Base.BaseAdapter;
 import com.example.tjombol.views.TransactionListFragment;
 
@@ -23,6 +24,7 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
     private static final String TAG = "TX_ADAPTER";
     private List<TxEntity> transactions;
     private TransactionListFragment mFragment;
+
 
     public TransactionAdapter(TransactionListFragment mFragment) {
         transactions = new ArrayList<>();
@@ -48,7 +50,7 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         holder.onBind(currentTransaction);
 
 
-        Log.e(TAG, "setData() is called: /n"
+        Log.d(TAG, "setData() is called: /n"
                 + Arrays.toString(new String[]{String.valueOf(currentTransaction.getTransactionStatus()),
                 currentTransaction.getSender(),
                 currentTransaction.getReceiver(),
@@ -61,16 +63,19 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         String amountWithType;
         //Set Text Color
         if (currentTransaction.getTransactionStatus()==0) {
-            holder.binding.amount.setTextColor(Color.parseColor("#47AD51"));
-            amountWithType = "+$"+currentTransaction.getAmount();
+            Log.d(TAG, "txStatus: out of my account 0 pending");
+            holder.binding.amount.setTextColor(Color.parseColor("#FF9800"));
+            amountWithType = "$"+currentTransaction.getAmount();
         }
 
         else if (currentTransaction.getTransactionStatus()==1) {
+            Log.d(TAG, "txStatus: out of my account 1 completed");
             holder.binding.amount.setTextColor(Color.parseColor("#E03F35"));
             amountWithType = "-$"+ currentTransaction.getAmount();
         }
         else{
-            holder.binding.amount.setTextColor(Color.parseColor("#FF9800"));
+            Log.d(TAG, "txStatus: into my account 0/1");
+            holder.binding.amount.setTextColor(Color.parseColor("#47AD51"));
             amountWithType = "-$"+ currentTransaction.getAmount();
         }
         // Set text after color change
@@ -79,8 +84,9 @@ public class TransactionAdapter extends BaseAdapter<TransactionAdapter.TxViewHol
         // Set onclick listener to each item
         holder.itemView.setOnClickListener(view -> {
 
-            if (currentTransaction.getTransactionStatus() == 0) {
-                mFragment.togglePayslipPopup(view);
+            if (currentTransaction.getTransactionStatus() == 1) {
+                Log.d(TAG, "onBindViewHolder: popUp");
+                mFragment.togglePayslipPopup(view,currentTransaction);
             }
             else {
                 if (holder.binding.linearLayoutExtraInfo.getVisibility() == View.GONE) {

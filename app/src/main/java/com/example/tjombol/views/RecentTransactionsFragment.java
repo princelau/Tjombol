@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +19,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.tjombol.R;
+import com.example.tjombol.remote.Models.UserInfoResponseModel;
+import com.example.tjombol.remote.Resource;
+import com.example.tjombol.viewModels.HomeFragmentViewModel;
 
 
 public class RecentTransactionsFragment extends Fragment {
@@ -27,6 +32,7 @@ public class RecentTransactionsFragment extends Fragment {
     private ImageView mImageViewEmpty;
     private RecyclerView mRecyclerView;
     private ListAdapter mListadapter;
+    private HomeFragmentViewModel homeFragmentViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +40,7 @@ public class RecentTransactionsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recent_transactions, container, false);
 
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragRecentRecyclerView);
         mTextViewEmpty = (TextView)view.findViewById(R.id.textViewEmpty);
         mImageViewEmpty = (ImageView)view.findViewById(R.id.imageViewEmpty);
         mProgressBarLoading = (ProgressBar)view.findViewById(R.id.progressBarLoading);
@@ -44,10 +50,22 @@ public class RecentTransactionsFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new LineDividerRecyclerViewDark(getActivity()));
 
-        //ArrayList data = new ArrayList<Transaction>();
-        //for (int i = 0; i < TransactionInformation.idArray.length; i++)
+        // ViewModel
 
-        /*
+/*
+        homeFragmentViewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel.class);
+        homeFragmentViewModel.init();
+        homeFragmentViewModel.getUserInfoObservable("7111111").observe(this, new Observer<Resource<UserInfoResponseModel>>() {
+            @Override
+            public void onChanged(Resource<UserInfoResponseModel> userInfoResponseModelResource) {
+                userInfoResponseModelResource.data
+            }
+        });
+
+        ArrayList data = new ArrayList<Transaction>();
+        for (int i = 0; i < TransactionInformation.idArray.length; i++)
+
+
         for (int i = 0; i < 3; i++)
         {
             data.add(
@@ -63,10 +81,10 @@ public class RecentTransactionsFragment extends Fragment {
                                     TransactionInformation.statusArray[i]
                             ));
         }
-        */
-        //mListadapter = new ListAdapter(data);
-        //mRecyclerView.setAdapter(mListadapter);
 
+        mListadapter = new ListAdapter(data);
+        mRecyclerView.setAdapter(mListadapter);
+*/
         return view;
 
 

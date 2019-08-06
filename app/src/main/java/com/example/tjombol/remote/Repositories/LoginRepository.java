@@ -21,6 +21,7 @@ public class LoginRepository {
     private static LoginRepository instance;
     private static final String TAG = "LoginRepository";
 
+
     public static LoginRepository getInstance() {
         if (instance == null) {
             instance = new LoginRepository();

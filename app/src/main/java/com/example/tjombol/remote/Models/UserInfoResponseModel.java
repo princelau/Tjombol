@@ -1,5 +1,7 @@
 package com.example.tjombol.remote.Models;
 
+import java.util.List;
+
 public class UserInfoResponseModel {
 
     private String companyId;
@@ -12,9 +14,10 @@ public class UserInfoResponseModel {
     private String mSalary;
     private String wBalance;
     private String eDateCreated;
+    private List<PlanModel> eMonthlyPlan;
 
 
-    public UserInfoResponseModel(String companyId, String eNRIC, String eId, String eName, String eEmail, String mNumber, String pScheme, String mSalary, String wBalance, String eDateCreated) {
+    public UserInfoResponseModel(String companyId, String eNRIC, String eId, String eName, String eEmail, String mNumber, String pScheme, String mSalary, String wBalance, String eDateCreated, List<PlanModel> eMonthlyPlan) {
         this.companyId = companyId;
         this.eNRIC = eNRIC;
         this.eId = eId;
@@ -25,6 +28,7 @@ public class UserInfoResponseModel {
         this.mSalary = mSalary;
         this.wBalance = wBalance;
         this.eDateCreated = eDateCreated;
+        this.eMonthlyPlan = eMonthlyPlan;
     }
 
     public String getCompanyId() {
@@ -105,5 +109,13 @@ public class UserInfoResponseModel {
 
     public void seteDateCreated(String eDateCreated) {
         this.eDateCreated = eDateCreated;
+    }
+
+    public List<PlanModel> geteMonthlyPlan() {
+        return eMonthlyPlan;
+    }
+
+    public void seteMonthlyPlan(List<PlanModel> eMonthlyPlan) {
+        this.eMonthlyPlan = eMonthlyPlan;
     }
 }
