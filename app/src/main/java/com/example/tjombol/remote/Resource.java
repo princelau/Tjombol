@@ -4,6 +4,8 @@ package com.example.tjombol.remote;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.Serializable;
+
 import static com.example.tjombol.remote.Status.ERROR;
 import static com.example.tjombol.remote.Status.INITIALIZING;
 import static com.example.tjombol.remote.Status.LOADING;

@@ -5,15 +5,14 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.tjombol.db.DAOs.TransactionDao;
 import com.example.tjombol.db.TxEntity;
 import com.example.tjombol.remote.ApiService;
-import com.example.tjombol.remote.Models.LoginResponseModel;
 import com.example.tjombol.remote.NetworkBoundResource;
 import com.example.tjombol.remote.Resource;
 import com.example.tjombol.remote.UserConstant;
-
 import java.util.List;
 
 import javax.inject.Inject;

@@ -25,22 +25,32 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.tjombol.Adapters.HomeAdapter;
 import com.example.tjombol.R;
 import com.example.tjombol.databinding.FragmentHomeBinding;
+import com.example.tjombol.db.TxEntity;
+import com.example.tjombol.remote.Resource;
+import com.example.tjombol.remote.Status;
 import com.example.tjombol.remote.UserConstant;
+import com.example.tjombol.viewModels.TransactionListViewModel;
+import com.example.tjombol.views.Base.BaseFragment;
 
 import java.util.Date;
+import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
     private String amountWithdraw;
     private FragmentHomeBinding dataBinding;
     private UserConstant userConstant;
+    private Resource<List<TxEntity>> resource;
     //private HomeFragmentViewModel homeFragmentViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+        dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_home , container, false);
         // Setup ViewPager
+
+
+
         final ViewPager viewPager = dataBinding.viewPager;
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
@@ -106,10 +116,11 @@ public class HomeFragment extends Fragment {
         dataBinding.moneyToday.setText(userConstant.getUser_balance());
         dataBinding.dateTextView.setText(s);
 
-        int progress = 10;
+        int progress = 0;
         String strProgress = progress + "%";
         dataBinding.progressBarPaidPercent.setText(strProgress);
         dataBinding.progressBarPaidNumber.setText(String.format("%s/%s",userConstant.getUser_balance(),userConstant.getUser_salary()));
+        dataBinding.progressBarPaid.setProgress(0);
         ObjectAnimator animationPaid = ObjectAnimator.ofInt(dataBinding.progressBarPaid, "progress", 0, 100); // see this max value coming back here, we animate towards that value
         int PROGRESSBAR_DURATION = 5000;
         animationPaid.setDuration(PROGRESSBAR_DURATION); // in milliseconds
@@ -118,6 +129,7 @@ public class HomeFragment extends Fragment {
         /* ProgressBar Drawable = requested(red num)/month salary*/
         dataBinding.progressBarDrawablePercent.setText(strProgress);
         dataBinding.progressBarDrawableNumber.setText(String.format("%s/%s",userConstant.getUser_balance(),userConstant.getUser_salary()));
+        dataBinding.progressBarDrawable.setProgress(0);
         ObjectAnimator animationDrawable = ObjectAnimator.ofInt(dataBinding.progressBarDrawable, "progress", 0, 500); // see this max value coming back here, we animate towards that value
         animationDrawable.setDuration(PROGRESSBAR_DURATION); // in milliseconds
         animationDrawable.setInterpolator(new DecelerateInterpolator());
@@ -125,6 +137,7 @@ public class HomeFragment extends Fragment {
         /* ProgressBar Percentage = overtime (0/0) */
         dataBinding.progressBarOutstandingPercent.setText(strProgress);
         dataBinding.progressBarOutstandingNumber.setText(String.format("%s/%s",userConstant.getUser_balance(),userConstant.getUser_salary()));
+        dataBinding.progressBarOutstanding.setProgress(0);
         ObjectAnimator animationOutstanding = ObjectAnimator.ofInt(dataBinding.progressBarOutstanding, "progress", 0, 500); // see this max value coming back here, we animate towards that value
         animationOutstanding.setDuration(PROGRESSBAR_DURATION); // in milliseconds
         animationOutstanding.setInterpolator(new DecelerateInterpolator());
@@ -136,5 +149,10 @@ public class HomeFragment extends Fragment {
         adapter.addFragment(new RecentTransactionsFragment(), "Recent Transactions");
         adapter.addFragment(new UpcomingSalaryFragment(), "Upcoming Salary");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 }

@@ -12,320 +12,321 @@
     </data>
 
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/todayTextView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorBackground"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:paddingTop="10dp"
+            android:text="@string/today_top_bar"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="35sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/todayTextView"
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:paddingBottom="10dp"
+            android:text="@string/date_top_bar"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
-                android:paddingTop="10dp"
-                android:text="@string/today_top_bar"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="35sp"
-                android:textStyle="bold" />
+                android:layout_height="170dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/primary_rounded_rectangle"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/dateTextView"
+                <TextView
+                    android:id="@+id/availableBalance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:paddingTop="10dp"
+                    android:text="@string/wallet_balance_text"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/moneyToday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/wallet_balance_number"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
-                android:paddingBottom="10dp"
-                android:text="@string/date_top_bar"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="135dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="120dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/white_rounded_rectangle"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/primary_rounded_rectangle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/availableBalance"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
-                        android:paddingTop="10dp"
-                        android:text="@string/wallet_balance_text"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ProgressBar
+                            android:id="@+id/progressBarPaid"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="110dp"
+                            android:layout_height="110dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/progressbar_background"
+                            android:max="500"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/progressbar_paid" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/progressBarPaidPercent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/montserrat"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/progressBarPaidText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/montserrat"
+                                android:text="Paid"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/moneyToday"
-                        android:layout_width="match_parent"
+                        android:id="@+id/progressBarPaidNumber"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat"
-                        android:text="@string/wallet_balance_number"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="50sp"
-                        android:textStyle="bold" />
+                        android:text="TextView"
+                        android:textColor="#000000" />
 
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="135dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="97.5dp"
-                    android:layout_marginEnd="40dp"
-                    android:baselineAligned="false"
-                    android:background="@drawable/white_rounded_rectangle"
-                    android:orientation="horizontal">
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content">
 
+                        <ProgressBar
+                            android:id="@+id/progressBarDrawable"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="110dp"
+                            android:layout_height="110dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/progressbar_background"
+                            android:max="500"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/progressbar_drawable" />
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <ProgressBar
-                                android:id="@+id/progressBarPaid"
-                                style="?android:attr/progressBarStyleHorizontal"
-                                android:layout_width="110dp"
-                                android:layout_height="110dp"
-                                android:layout_centerInParent="true"
-                                android:background="@drawable/progressbar_background"
-                                android:max="500"
-                                android:progress="0"
-                                android:progressDrawable="@drawable/progressbar_paid" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/progressBarPaidPercent"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@android:color/transparent"
-                                    android:fontFamily="@font/montserrat"
-                                    android:textAlignment="center"
-                                    android:textColor="@android:color/black"
-                                    android:textSize="20sp" />
-
-                                <TextView
-                                    android:id="@+id/progressBarPaidText"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@android:color/transparent"
-                                    android:fontFamily="@font/montserrat"
-                                    android:text="Paid"
-                                    android:textAlignment="center"
-                                    android:textColor="@android:color/black"
-                                    android:textSize="11sp" />
-
-                            </LinearLayout>
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/progressBarPaidNumber"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat"
-                            android:text="TextView"
-                            android:textColor="#000000" />
+                            android:layout_centerInParent="true"
+                            android:orientation="vertical">
 
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <ProgressBar
-                                android:id="@+id/progressBarDrawable"
-                                style="?android:attr/progressBarStyleHorizontal"
-                                android:layout_width="110dp"
-                                android:layout_height="110dp"
-                                android:layout_centerInParent="true"
-                                android:background="@drawable/progressbar_background"
-                                android:max="500"
-                                android:progress="0"
-                                android:progressDrawable="@drawable/progressbar_drawable" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
+                            <TextView
+                                android:id="@+id/progressBarDrawablePercent"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:orientation="vertical">
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/montserrat"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="20sp" />
 
-                                <TextView
-                                    android:id="@+id/progressBarDrawablePercent"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@android:color/transparent"
-                                    android:fontFamily="@font/montserrat"
-                                    android:textAlignment="center"
-                                    android:textColor="@android:color/black"
-                                    android:textSize="20sp" />
-
-                                <TextView
-                                    android:id="@+id/progressBarDrawableText"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@android:color/transparent"
-                                    android:fontFamily="@font/montserrat"
-                                    android:text="Drawable"
-                                    android:textAlignment="center"
-                                    android:textColor="@android:color/black"
-                                    android:textSize="11sp" />
-
-                            </LinearLayout>
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/progressBarDrawableNumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat"
-                            android:text="TextView"
-                            android:textColor="#000000" />
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <ProgressBar
-                                android:id="@+id/progressBarOutstanding"
-                                style="?android:attr/progressBarStyleHorizontal"
-                                android:layout_width="110dp"
-                                android:layout_height="110dp"
-                                android:layout_centerInParent="true"
-                                android:background="@drawable/progressbar_background"
-                                android:max="500"
-                                android:progress="0"
-                                android:progressDrawable="@drawable/progressbar_outstanding" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
+                            <TextView
+                                android:id="@+id/progressBarDrawableText"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:orientation="vertical">
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/montserrat"
+                                android:text="Drawable"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="11sp" />
 
-                                <TextView
-                                    android:id="@+id/progressBarOutstandingPercent"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@android:color/transparent"
-                                    android:fontFamily="@font/montserrat"
-                                    android:textAlignment="center"
-                                    android:textColor="@android:color/black"
-                                    android:textSize="20sp" />
+                        </LinearLayout>
+                    </RelativeLayout>
 
-                                <TextView
-                                    android:id="@+id/progressBarOutstandingText"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@android:color/transparent"
-                                    android:fontFamily="@font/montserrat"
-                                    android:text="Outstanding"
-                                    android:textAlignment="center"
-                                    android:textColor="@android:color/black"
-                                    android:textSize="11sp" />
-
-                            </LinearLayout>
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/progressBarOutstandingNumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat"
-                            android:text="TextView"
-                            android:textColor="@android:color/black" />
-
-
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/progressBarDrawableNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:text="TextView"
+                        android:textColor="#000000" />
 
 
                 </LinearLayout>
 
-            </RelativeLayout>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="13dp"
-                android:background="@drawable/white_rounded_top_rectangle"
-                app:tabIndicatorColor="@color/colorPrimary"
-                app:tabIndicatorHeight="5dp"
-                app:tabSelectedTextColor="@color/colorPrimary"
-                app:tabTextAppearance="@style/HomeFragmentTabTable"
-                app:tabTextColor="@android:color/black" />
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="142dp"
-                android:layout_marginStart="13dp"
-                android:layout_marginEnd="13dp"
-                android:background="@drawable/white_rounded_bottom_rectangle" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
 
-            <Button
-                android:id="@+id/claimSalaryButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="15sp"
-                android:layout_marginEnd="13dp"
-                android:background="@drawable/primary_rounded_rectangle"
-                android:fontFamily="@font/montserrat"
-                android:padding="12dp"
-                android:text="Claim Salary"
-                android:textColor="@android:color/white"
-                android:textSize="23sp" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-        </LinearLayout>
+                        <ProgressBar
+                            android:id="@+id/progressBarOutstanding"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="110dp"
+                            android:layout_height="110dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/progressbar_background"
+                            android:max="500"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/progressbar_outstanding" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/progressBarOutstandingPercent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/montserrat"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/progressBarOutstandingText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/montserrat"
+                                android:text="Outstanding"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/progressBarOutstandingNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:text="TextView"
+                        android:textColor="@android:color/black" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="13dp"
+            android:background="@drawable/white_rounded_top_rectangle"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorHeight="5dp"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextAppearance="@style/HomeFragmentTabTable"
+            app:tabTextColor="@android:color/black" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="142dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="13dp"
+            android:background="@drawable/white_rounded_bottom_rectangle" />
+
+
+        <Button
+            android:id="@+id/claimSalaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="13dp"
+            android:background="@drawable/primary_rounded_rectangle"
+            android:fontFamily="@font/montserrat"
+            android:padding="12dp"
+            android:text="Claim Salary"
+            android:textColor="@android:color/white"
+            android:textSize="23sp" />
+
+    </LinearLayout>
 
 </layout>
